@@ -6,6 +6,14 @@
 
 ## 用法
 
+
+### 0. 住宿
+頁面頂部會顯示住宿酒店 chip · 撳開就到 trip.com:
+- **佛山柏希酒店** — 順德區容桂東堤路16號
+- 連結: https://www.trip.com/w/DecTOJYQ5V2
+
+改酒店資料:打開 `index.html`,搵 `<script type="application/json" id="users-data">`,改 `hotel` 個 field(name / address / url)。
+
 ### 1. 開站
 雙擊 `index.html`,或者執行:
 ```bash

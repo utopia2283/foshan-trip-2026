@@ -290,6 +290,46 @@ a:hover { text-decoration: underline; }
   font-size: 15px;
   font-variant-numeric: tabular-nums;
 }
+.welcome__hotel {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 14px;
+  padding: 8px 14px 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 13px;
+  transition: border-color 150ms ease, background 150ms ease;
+  width: fit-content;
+  max-width: 100%;
+}
+.welcome__hotel:hover {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+}
+.welcome__hotel-icon { font-size: 16px; line-height: 1; }
+.welcome__hotel-text { display: flex; align-items: baseline; gap: 6px; min-width: 0; }
+.welcome__hotel-label {
+  font-size: 11px;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+.welcome__hotel-name {
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+.welcome__hotel-arrow {
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1;
+}
 
 /* ====== TABS ====== */
 .tabs {
@@ -902,6 +942,14 @@ button:focus-visible { outline-offset: 1px; }
       <div class="welcome__count" id="welcome-count"></div>
     </div>
     <div class="welcome__countdown" id="welcome-countdown"></div>
+    <a class="welcome__hotel" id="welcome-hotel" href="#" target="_blank" rel="noopener" hidden>
+      <span class="welcome__hotel-icon" aria-hidden="true">🏨</span>
+      <span class="welcome__hotel-text">
+        <span class="welcome__hotel-label">住宿</span>
+        <span class="welcome__hotel-name" id="welcome-hotel-name"></span>
+      </span>
+      <span class="welcome__hotel-arrow" aria-hidden="true">↗</span>
+    </a>
   </div>
 
   <nav class="tabs" id="tabs" role="tablist" aria-label="分類"></nav>
@@ -980,6 +1028,11 @@ button:focus-visible { outline-offset: 1px; }
   "tripStartTs": 1782844800000,
   "tripEndTs": 1783104000000,
   "organizer": "Match",
+  "hotel": {
+    "name": "佛山柏希酒店",
+    "address": "順德區容桂東堤路16號",
+    "url": "https://www.trip.com/w/DecTOJYQ5V2"
+  },
   "users": [
     {"name": "Match", "role": "organizer", "avatar": "🧲"},
     {"name": "Carrie", "avatar": "🍆"},
@@ -2021,6 +2074,17 @@ button:focus-visible { outline-offset: 1px; }
     const pct = total === 0 ? 0 : (voted / total) * 100;
     $('#welcome-fill').style.width = pct + '%';
     $('#welcome-count').textContent = `${voted} / ${total}`;
+    // Hotel link
+    const hotelEl = $('#welcome-hotel');
+    const hotel = USERS_DATA.hotel;
+    if (hotelEl && hotel) {
+      hotelEl.hidden = false;
+      hotelEl.href = hotel.url;
+      $('#welcome-hotel-name').textContent = hotel.name;
+      hotelEl.setAttribute('aria-label', `住宿: ${hotel.name} · 開新頁`);
+    } else if (hotelEl) {
+      hotelEl.hidden = true;
+    }
     // Countdown
     const now = Date.now();
     const cd = $('#welcome-countdown');
