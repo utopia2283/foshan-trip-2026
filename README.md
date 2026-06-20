@@ -14,6 +14,13 @@
 
 改酒店資料:打開 `index.html`,搵 `<script type="application/json" id="users-data">`,改 `hotel` 個 field(name / address / url)。
 
+### 0.5 大眾點評連結
+每間餐廳卡片右上角會顯示「↗ 點評」chip · 撳開直接跳去大眾點評 shop 頁(新分頁):
+- 17 餐廳入面有 16 間用 `dianping.com/shop/{id}` 直接連去店家頁
+- `百搭粥神` 用 `dianping.com/search/keyword/...` 因為佢冇官方店頁
+
+改連結:打開 `index.html`,搵 `<script type="application/json" id="places-data">`,每個 restaurant 個 entry 加 `"dianping": "https://..."` 即可。
+
 ### 1. 開站
 雙擊 `index.html`,或者執行:
 ```bash
