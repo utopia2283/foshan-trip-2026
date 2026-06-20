@@ -21,6 +21,10 @@
 
 改連結:打開 `index.html`,搵 `<script type="application/json" id="places-data">`,每個 restaurant 個 entry 加 `"dianping": "https://..."` 即可。
 
+### 0.7 介面(更新版)
+撳入即見 9 個大掣(揀你個名) → 進去見 4 個 tab(`想食/想玩/想唱/想hea`)+ 全部,卡片底部全闊 `投畀呢度` 掣 → 1 撳即投。
+主揪 Match 會喺 `⋯ 選單` 見到額外 `主揪總覽` 同 `全部地點地圖`。
+
 ### 1. 開站
 雙擊 `index.html`,或者執行:
 ```bash
@@ -60,7 +64,7 @@ open "/Users/match/Documents/TVC Director/foshan-trip-2026/index.html"
 - 重複 import 9 個人嘅 JSON
 - 去「主揪總覽」tab 睇全部結果
 
-## 候選地點(25 個)
+## 候選地點(30 個)
 
 ### 餐廳 17
 **順德私房菜**

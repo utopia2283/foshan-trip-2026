@@ -140,6 +140,53 @@ a:hover { text-decoration: underline; }
   text-align: center;
   line-height: 1.5;
 }
+.login__hint {
+  margin: 0 0 18px;
+  font-size: 15px;
+  color: var(--ink);
+  font-weight: 500;
+  text-align: center;
+}
+.login__users {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 0 0 18px;
+}
+.login__user {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 12px 6px 10px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  cursor: pointer;
+  transition: border-color 150ms ease, transform 100ms ease, background 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+  font-family: inherit;
+  color: var(--ink);
+}
+.login__user:hover { border-color: var(--brand); background: var(--brand-soft); }
+.login__user:active { transform: scale(0.97); }
+.login__user-avatar { font-size: 24px; line-height: 1; }
+.login__user-name {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.login__user-role {
+  font-size: 10px;
+  color: var(--ink-faint);
+}
+.login__user--organizer { border-color: var(--brand); background: var(--brand-soft); }
+.login__fallback summary {
+  font-size: 12px;
+  color: var(--ink-faint);
+  cursor: pointer;
+  text-align: center;
+  padding: 6px;
+  user-select: none;
+}
+.login__fallback summary:hover { color: var(--ink-muted); }
 
 /* ====== BUTTONS ====== */
 .btn {
@@ -344,6 +391,7 @@ a:hover { text-decoration: underline; }
   scrollbar-width: none;
 }
 .tabs::-webkit-scrollbar { display: none; }
+.tab__icon { font-size: 14px; line-height: 1; margin-right: 2px; }
 .tab {
   padding: 14px 16px;
   font-size: 14px;
@@ -398,176 +446,73 @@ a:hover { text-decoration: underline; }
 }
 .chip__icon { font-size: 12px; }
 
-/* ====== WELCOME (compact - countdown + hotel only) ====== */
-.welcome--compact {
-  padding: 16px 20px;
+/* ====== WELCOME ====== */
+.welcome {
+  padding: 20px 20px 16px;
   background: var(--paper);
   border-bottom: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 12px;
 }
-.welcome__row {
+.welcome__primary {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.welcome__progress {
+  display: flex; align-items: center; gap: 12px; flex: 1; min-width: 240px;
+}
+.welcome__progress-num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--brand);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+.welcome__progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  min-width: 100px;
+}
+.welcome__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+  width: 0%;
+  transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 999px;
+}
+.welcome__progress-text {
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+.welcome__secondary {
   display: flex; align-items: center; justify-content: space-between;
   gap: 12px; flex-wrap: wrap;
-}
-.welcome--compact .welcome__countdown {
-  font-size: 13px; color: var(--ink-muted);
-  display: flex; align-items: center; gap: 8px;
-}
-
-/* ====== FAN HERO (Top 7 編輯精選) ====== */
-.fan-hero {
-  padding: 28px 20px 36px;
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
-}
-.fan-hero__head {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: 12px; margin-bottom: 18px; flex-wrap: wrap;
-}
-.fan-hero__title {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin: 0;
-  color: var(--ink);
-  display: flex; align-items: baseline; gap: 10px;
-}
-.fan-hero__title-icon { font-size: 18px; line-height: 1; }
-.fan-hero__title-count {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--ink-muted);
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-}
-.fan-hero__sub {
-  font-size: 12px;
-  color: var(--ink-muted);
-  margin: 0;
-  max-width: 360px;
-  text-align: right;
-}
-.fan-hero__stage {
-  position: relative;
-  width: 100%;
-  min-height: 360px;
-  display: flex; align-items: center; justify-content: center;
-}
-@media (min-width: 640px) { .fan-hero__stage { min-height: 420px; } }
-@media (min-width: 1024px) { .fan-hero__stage { min-height: 460px; } }
-.fan-hero__cards {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.fan-card {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 150px; aspect-ratio: 3 / 4;
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: 0 6px 18px rgba(26,22,18,0.08);
-  cursor: pointer;
-  transform-origin: center center;
-  transition: transform 600ms cubic-bezier(0.34, 1.2, 0.64, 1),
-              opacity 400ms ease, box-shadow 200ms ease;
-  will-change: transform, opacity;
-}
-.fan-card:hover { box-shadow: 0 10px 24px rgba(26,22,18,0.14); }
-@media (min-width: 640px) { .fan-card { width: 180px; } }
-@media (min-width: 1024px) { .fan-card { width: 200px; } }
-.fan-card__img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.fan-card__fallback {
-  position: absolute; inset: 0;
-  display: none;
-  background: linear-gradient(135deg, var(--brand-soft), var(--accent));
-  color: var(--brand-dark);
-  font-family: var(--font-display);
-  font-size: 18px;
-  align-items: center; justify-content: center;
-  text-align: center;
-  padding: 12px;
-  word-break: keep-all;
-}
-.fan-card__overlay {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 10px 10px 8px;
-  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.7) 100%);
-  color: white;
-  pointer-events: none;
-}
-.fan-card__cat {
-  position: absolute; top: 8px; left: 8px;
-  display: inline-flex; align-items: center; gap: 4px;
-  font-size: 10px; font-weight: 500;
-  padding: 3px 7px; border-radius: 999px;
-  background: rgba(255,255,255,0.92);
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-  backdrop-filter: blur(4px);
-  letter-spacing: 0.02em;
-}
-.fan-card__name {
-  font-family: var(--font-display);
   font-size: 13px;
-  font-weight: 700;
-  line-height: 1.25;
-  margin: 0 0 2px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
-.fan-card__rating {
+.welcome__countdown {
+  font-size: 12px; color: var(--ink-muted);
+  display: flex; align-items: center; gap: 6px;
+}
+.welcome__cta {
+  font-size: 12px; color: var(--ink-muted);
+  display: flex; align-items: center; gap: 6px;
+}
+.welcome__cta-btn {
+  display: inline-flex; align-items: center;
   font-family: var(--font-mono);
   font-size: 11px;
-  color: rgba(255,255,255,0.9);
-  font-variant-numeric: tabular-nums;
-}
-@media (min-width: 640px) {
-  .fan-card__name { font-size: 14px; }
-  .fan-card__rating { font-size: 12px; }
-}
-.fan-hero__pagination {
-  display: flex; align-items: center; justify-content: center;
-  gap: 14px; margin-top: 24px;
-}
-.fan-arrow {
-  width: 40px; height: 40px;
-  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 500;
+  padding: 2px 8px;
   border-radius: 999px;
-  background: var(--paper);
-  border: 1.5px solid var(--line);
-  color: var(--ink-muted);
-  cursor: pointer;
-  font-size: 18px;
-  line-height: 1;
-  font-family: var(--font-mono);
-  transition: border-color 150ms ease, color 150ms ease, background 150ms ease, transform 100ms ease;
-  -webkit-tap-highlight-color: transparent;
+  background: var(--brand-soft);
+  color: var(--brand-dark);
+  border: 1.5px solid var(--brand);
 }
-.fan-arrow:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-soft); }
-.fan-arrow:active { transform: scale(0.94); }
-.fan-dots { display: flex; align-items: center; gap: 6px; }
-.fan-dot {
-  width: 7px; height: 7px;
-  border-radius: 999px;
-  background: var(--line);
-  border: 0; padding: 0;
-  cursor: pointer;
-  transition: background 200ms ease, transform 200ms ease, width 200ms ease;
-  -webkit-tap-highlight-color: transparent;
-}
-.fan-dot.is-active { background: var(--brand); width: 22px; }
 
 /* ====== GRID + SECTIONS ====== */
 .grid {
@@ -795,6 +740,12 @@ a:hover { text-decoration: underline; }
   display: flex; align-items: center; gap: 6px;
   min-height: 28px;
 }
+.card__voters {
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: 8px;
+  min-height: 24px;
+}
+.voters__count--empty { color: var(--ink-faint); font-size: 12px; }
 .voters__list {
   display: flex; gap: -4px;
 }
@@ -816,21 +767,31 @@ a:hover { text-decoration: underline; }
   margin-left: 6px;
 }
 .btn-vote {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: transparent;
-  color: var(--brand);
-  border: 1px solid var(--brand);
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 150ms ease;
-  -webkit-tap-highlight-color: transparent;
-}
-.btn-vote:hover { background: var(--brand-soft); }
-.btn-vote.is-voted {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
   background: var(--brand);
   color: white;
+  border: 0;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease, transform 100ms ease, box-shadow 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+  white-space: nowrap;
+  width: 100%;
+  margin-top: 12px;
+  box-shadow: 0 2px 6px rgba(196, 64, 50, 0.18);
+}
+.btn-vote:hover { box-shadow: 0 4px 10px rgba(196, 64, 50, 0.24); }
+.btn-vote:active { transform: scale(0.98); }
+.btn-vote.is-voted {
+  background: var(--paper);
+  color: var(--brand);
+  border: 1.5px solid var(--brand);
+  box-shadow: none;
 }
 .btn-vote__icon {
   font-size: 14px;
@@ -1034,6 +995,7 @@ a:hover { text-decoration: underline; }
   -webkit-tap-highlight-color: transparent;
 }
 .drawer__item:hover { background: var(--surface); }
+.drawer__item--org { border-top: 1px solid var(--line); margin-top: 8px; padding-top: 8px; }
 .drawer__item-icon { font-size: 18px; }
 
 /* ====== MODAL (native dialog) ====== */
@@ -1135,15 +1097,20 @@ button:focus-visible { outline-offset: 1px; }
     <div class="login__logo" aria-hidden="true">🏮</div>
     <h1 id="login-title" class="login__title">佛山順德容桂 3 日遊</h1>
     <p class="login__subtitle">投票站 · 6/30 - 7/2</p>
-    <form class="login__form" id="login-form" autocomplete="off" novalidate>
-      <label class="login__field">
-        <span>Access Code(英文名)</span>
-        <input type="text" id="login-name" placeholder="打你個英文名" autocomplete="off" autocapitalize="off" autocorrect="off" required>
-      </label>
-      <button type="submit" class="btn btn--primary btn--block btn--full" id="login-submit">開始投票 →</button>
-      <p class="login__error" id="login-error" role="alert" aria-live="polite"></p>
-    </form>
-    <p class="login__help">問主揪 Match 攞你個英文名就入到</p>
+    <p class="login__hint">揀你個名 → 投你鍾意嘅地方</p>
+    <div class="login__users" id="login-users" role="listbox" aria-label="揀你個名"></div>
+    <details class="login__fallback">
+      <summary>冇見到自己個名?打英文名手動入</summary>
+      <form class="login__form" id="login-form" autocomplete="off" novalidate>
+        <label class="login__field">
+          <span>英文名</span>
+          <input type="text" id="login-name" placeholder="例: Match / Carrie" autocomplete="off" autocapitalize="off" autocorrect="off" required>
+        </label>
+        <button type="submit" class="btn btn--primary btn--block btn--full" id="login-submit">開始投票 →</button>
+        <p class="login__error" id="login-error" role="alert" aria-live="polite"></p>
+      </form>
+    </details>
+    <p class="login__help">主揪 Match 喺度加新朋友 · 撳 ⋯ 睇主揪後台</p>
   </div>
 </section>
 
@@ -1161,9 +1128,15 @@ button:focus-visible { outline-offset: 1px; }
     <button class="appbar__menu" id="appbar-menu" aria-label="開啟選單">⋯</button>
   </header>
 
-  <div class="welcome welcome--compact">
-    <div class="welcome__row">
-      <div class="welcome__countdown" id="welcome-countdown"></div>
+  <div class="welcome">
+    <div class="welcome__primary">
+      <div class="welcome__progress">
+        <div class="welcome__progress-num" id="welcome-progress-num">0/30</div>
+        <div class="welcome__progress-bar" role="progressbar" aria-label="你的投票進度">
+          <div class="welcome__progress-fill" id="welcome-progress-fill"></div>
+        </div>
+        <div class="welcome__progress-text" id="welcome-progress-text">你投咗 0 個 · 仲有 30 個未揀好</div>
+      </div>
       <a class="welcome__hotel" id="welcome-hotel" href="#" target="_blank" rel="noopener" hidden>
         <span class="welcome__hotel-icon" aria-hidden="true">🏨</span>
         <span class="welcome__hotel-text">
@@ -1172,6 +1145,10 @@ button:focus-visible { outline-offset: 1px; }
         </span>
         <span class="welcome__hotel-arrow" aria-hidden="true">↗</span>
       </a>
+    </div>
+    <div class="welcome__secondary">
+      <div class="welcome__countdown" id="welcome-countdown"></div>
+      <div class="welcome__cta">撳下面任何卡片嘅 <span class="welcome__cta-btn">♡ 投</span> 開始投</div>
     </div>
   </div>
 
@@ -1189,6 +1166,8 @@ button:focus-visible { outline-offset: 1px; }
     <div class="drawer__title">選單</div>
   </div>
   <ul class="drawer__list">
+    <li class="drawer__item--org" id="drawer-overview-item" hidden><button class="drawer__item" data-action="overview"><span class="drawer__item-icon">📊</span> 主揪總覽</button></li>
+    <li><button class="drawer__item" data-action="maps"><span class="drawer__item-icon">🗺</span> 全部地點地圖</button></li>
     <li><button class="drawer__item" data-action="export"><span class="drawer__item-icon">📤</span> 匯出 JSON</button></li>
     <li><button class="drawer__item" data-action="import"><span class="drawer__item-icon">📥</span> 匯入 JSON</button></li>
     <li><button class="drawer__item" data-action="switch"><span class="drawer__item-icon">🔄</span> 切換用戶</button></li>
@@ -1411,7 +1390,7 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "13:00–23:00",
       "michelin": false,
       "imageIds": [
-        "1505740420928-5e560c06d30e",
+        "1559925393-8be0ec4767c8",
         "1473093295043-cdd812d0e601"
       ],
       "description": "容桂隱藏甜品店,抹茶控必去,抹茶布丁 QQ 彈彈入口即化,裝修靚打卡一流。",
@@ -1488,7 +1467,7 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "10:00–22:00",
       "michelin": false,
       "imageIds": [
-        "1606755962773-d324e0a13086",
+        "1519567241046-7f570eee3ce6",
         "1565299507177-b0ac66763828"
       ],
       "description": "2025 年 4 月新開,華潤置地灣西首個重資產項目,340+ 個品牌,超過 50% 順德首店,冷氣全開。"
@@ -1514,7 +1493,7 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "10:00–22:00",
       "michelin": false,
       "imageIds": [
-        "1496116218417-1a781b1c416c",
+        "1502810190503-8303352d0dd1",
         "1556909114-f6e7ad7d3136"
       ],
       "description": "免費入場,玩樂自選,夜景超靚水舞秀配摩天輪,夜晚影相最正。"
@@ -1539,7 +1518,7 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "10:00–21:00",
       "michelin": false,
       "imageIds": [
-        "1567620905732-2d1ec7ab7445",
+        "1517823382935-51bfcb0ec6bc",
         "1576618148400-f54bed99fcfd"
       ],
       "description": "室內冰雪樂園,恆溫零下 10 度,大熱天消暑親子首選。"
@@ -2228,6 +2207,27 @@ button:focus-visible { outline-offset: 1px; }
   const submitBtn = $('#login-submit');
   const errorEl = $('#login-error');
 
+  // Render 9 user buttons on login screen
+  function renderLoginUsers() {
+    const box = $('#login-users');
+    if (!box) return;
+    box.innerHTML = '';
+    for (const u of USERS_DATA.users) {
+      const btn = el('button', {
+        class: 'login__user' + (u.role === 'organizer' ? ' login__user--organizer' : ''),
+        type: 'button',
+        role: 'option',
+        'aria-label': `${u.name} · ${u.role === 'organizer' ? '主揪' : '投票者'}`,
+        onclick: () => { nameInput.value = u.name; tryLogin(); }
+      });
+      btn.appendChild(el('span', { class: 'login__user-avatar', text: u.avatar }));
+      btn.appendChild(el('span', { class: 'login__user-name', text: u.name }));
+      btn.appendChild(el('span', { class: 'login__user-role', text: u.role === 'organizer' ? '主揪' : '投票者' }));
+      box.appendChild(btn);
+    }
+  }
+  renderLoginUsers();
+
   function tryLogin() {
     if (Date.now() < cooldownUntil) {
       const remain = Math.ceil((cooldownUntil - Date.now()) / 1000);
@@ -2264,6 +2264,9 @@ button:focus-visible { outline-offset: 1px; }
   function enterApp() {
     loginScreen.hidden = true;
     appEl.hidden = false;
+    // Show organizer-only drawer item
+    const orgItem = $('#drawer-overview-item');
+    if (orgItem) orgItem.hidden = !isOrganizer();
     render();
     // Auto-show organizer tip on first login
     if (isOrganizer() && !localStorage.getItem('foshan_tip_shown')) {
@@ -2315,6 +2318,20 @@ button:focus-visible { outline-offset: 1px; }
   function renderWelcome() {
     const u = getUser(state.currentUser);
     if (!u) return;
+    // Progress
+    const voted = myVoteCount();
+    const total = PLACES_DATA.places.length;
+    const remain = total - voted;
+    const pct = total === 0 ? 0 : (voted / total) * 100;
+    const numEl = $('#welcome-progress-num');
+    const fillEl = $('#welcome-progress-fill');
+    const textEl = $('#welcome-progress-text');
+    if (numEl) numEl.textContent = `${voted}/${total}`;
+    if (fillEl) fillEl.style.width = pct + '%';
+    if (textEl) {
+      if (remain > 0) textEl.textContent = `你投咗 ${voted} 個 · 仲有 ${remain} 個未揀好`;
+      else textEl.textContent = '全部都投完啦 🎉';
+    }
     // Hotel link
     const hotelEl = $('#welcome-hotel');
     const hotel = USERS_DATA.hotel;
@@ -2350,14 +2367,14 @@ button:focus-visible { outline-offset: 1px; }
   function renderTabs() {
     const tabsEl = $('#tabs');
     tabsEl.innerHTML = '';
+    // 3 use-case tabs instead of 5 category tabs. 主揪總覽 moved to ⋯ menu.
     const tabs = [
-      { id: 'all', label: '全部' },
-      { id: 'restaurant', label: '餐廳' },
-      { id: 'attraction', label: '景點' },
-      { id: 'nightlife', label: '夜店' },
-      { id: 'wellness', label: '養生' }
+      { id: 'all', label: '全部', icon: '✦' },
+      { id: 'restaurant', label: '想食', icon: '🍜' },
+      { id: 'attraction', label: '想玩', icon: '🎡' },
+      { id: 'nightlife', label: '想唱', icon: '🎤' },
+      { id: 'wellness', label: '想hea', icon: '💆' }
     ];
-    if (isOrganizer()) tabs.push({ id: 'overview', label: '主揪總覽' });
     for (const t of tabs) {
       const btn = el('button', {
         class: 'tab' + (view.tab === t.id ? ' is-active' : ''),
@@ -2365,8 +2382,9 @@ button:focus-visible { outline-offset: 1px; }
         'aria-selected': view.tab === t.id ? 'true' : 'false',
         onclick: () => { view.tab = t.id; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
       });
+      if (t.icon) btn.appendChild(el('span', { class: 'tab__icon', text: t.icon }));
       btn.appendChild(el('span', { text: t.label }));
-      btn.appendChild(el('span', { class: 'tab__count', text: String(t.id === 'overview' ? USERS_DATA.users.length : countByCategory(t.id)) }));
+      btn.appendChild(el('span', { class: 'tab__count', text: String(countByCategory(t.id)) }));
       tabsEl.appendChild(btn);
     }
   }
@@ -2402,215 +2420,6 @@ button:focus-visible { outline-offset: 1px; }
     { id: 'wellness',   icon: '💆', title: '養生 · SPA', hint: '沐足 · 按摩 · K歌沐足' }
   ];
 
-  // Fan hero (Top 7 編輯精選) — vanilla port of @21st-dev/magic card-fan-carousel
-  const FAN_POSITIONS = [
-    { rot: -21, scale: 0.7756, x: -30, y: 7.3, zIndex: 1 },
-    { rot: -14, scale: 0.8498, x: -22, y: 4.0, zIndex: 2 },
-    { rot: -7,  scale: 0.9346, x: -11, y: 1.3, zIndex: 3 },
-    { rot: 0,   scale: 1.0,    x: 0,   y: 0.0, zIndex: 10 },
-    { rot: 7,   scale: 0.9346, x: 11,  y: 1.3, zIndex: 3 },
-    { rot: 14,  scale: 0.8498, x: 22,  y: 4.0, zIndex: 2 },
-    { rot: 21,  scale: 0.7756, x: 30,  y: 7.3, zIndex: 1 }
-  ];
-  const FAN_HALF = 3;
-  const FAN_MAX_VISIBLE = 7;
-  const fanState = { center: 0, hovered: null, animating: false, leaveTimer: null, els: [], dotEls: [] };
-
-  function fanResponsiveMult(w) {
-    if (w < 480) return 0.28;
-    if (w < 640) return 0.38;
-    if (w < 768) return 0.50;
-    if (w < 1024) return 0.75;
-    return 1.0;
-  }
-  function fanSlotConfig(total, slot) {
-    if (total >= FAN_MAX_VISIBLE) return FAN_POSITIONS[slot];
-    const center = total >> 1;
-    const distance = total > 1 ? (slot - center) / center : 0;
-    const abs = Math.abs(distance);
-    return {
-      rot: distance * 21,
-      scale: 1.0 - 0.2244 * abs * abs,
-      x: distance * 30,
-      y: abs * abs * 7.3,
-      zIndex: 10 - Math.abs(slot - center)
-    };
-  }
-  function fanVisibleMap(center, total) {
-    const map = new Map();
-    for (let slot = 0; slot < FAN_MAX_VISIBLE; slot++) {
-      map.set(((center + slot - FAN_HALF) % total + total) % total, slot);
-    }
-    return map;
-  }
-  function fanUpdate(hovered) {
-    const total = fanState.els.length;
-    if (!total) return;
-    const mult = fanResponsiveMult(window.innerWidth);
-    const visible = fanVisibleMap(fanState.center, total);
-    const centerSlot = FAN_HALF;
-    fanState.els.forEach((el, idx) => {
-      const slot = visible.get(idx);
-      if (slot === undefined) { el.style.opacity = '0'; el.style.pointerEvents = 'none'; return; }
-      const base = fanSlotConfig(total, slot);
-      let x = base.x * mult;
-      let y = base.y * mult;
-      let rot = base.rot;
-      let scale = base.scale;
-      if (hovered !== null) {
-        const dist = Math.abs(slot - hovered);
-        if (slot === hovered) {
-          y -= 2.5 * mult;
-          scale *= 1.08;
-        } else {
-          const normalized = centerSlot > 0 ? (slot - centerSlot) / centerSlot : 0;
-          const push = 8 * (1 - Math.abs(normalized)) * (1 + 0.2 * Math.max(0, 3 - dist));
-          if (slot < hovered) { x -= push * mult; rot -= 3 / (dist + 1); }
-          else                { x += push * mult; rot += 3 / (dist + 1); }
-        }
-      }
-      el.style.transform = `translate(calc(-50% + ${x}rem), calc(-50% + ${y}rem)) rotate(${rot}deg) scale(${scale})`;
-      el.style.zIndex = base.zIndex;
-      el.style.opacity = '1';
-      el.style.pointerEvents = 'auto';
-    });
-    fanState.dotEls.forEach((d, i) => d.classList.toggle('is-active', i === fanState.center));
-  }
-  function fanCycle(dir) {
-    if (fanState.animating) return;
-    const total = fanState.els.length;
-    if (!total) return;
-    fanState.animating = true;
-    fanState.center = dir === 'right' ? (fanState.center + 1) % total : (fanState.center - 1 + total) % total;
-    fanUpdate(fanState.hovered);
-    setTimeout(() => { fanState.animating = false; }, 620);
-  }
-  function fanBuild(places) {
-    const stage = el('div', { class: 'fan-hero__stage' });
-    const cardsBox = el('div', { class: 'fan-hero__cards', id: 'fan-cards' });
-    const catMap = { restaurant: '餐廳', attraction: '景點', nightlife: '夜店', wellness: '養生' };
-    fanState.els = [];
-    places.forEach((p, i) => {
-      const card = el('button', {
-        class: 'fan-card',
-        type: 'button',
-        'aria-label': `${p.name} · ${p.rating} 分`,
-        onclick: () => fanCycle(i > fanState.center ? 'right' : 'left')
-      });
-      const imgId = p.imageIds && p.imageIds[0];
-      if (imgId) {
-        card.appendChild(el('img', {
-          class: 'fan-card__img',
-          src: `https://images.unsplash.com/photo-${imgId}?w=600&q=80&auto=format&fit=crop`,
-          alt: p.name,
-          loading: 'lazy',
-          onerror: function() { this.style.display = 'none'; this.nextElementSibling.style.display = 'flex'; }
-        }));
-      }
-      card.appendChild(el('div', { class: 'fan-card__fallback', text: p.name }));
-      const overlay = el('div', { class: 'fan-card__overlay' });
-      overlay.appendChild(el('span', { class: 'fan-card__cat', text: catMap[p.category] || p.category }));
-      overlay.appendChild(el('h3', { class: 'fan-card__name', text: p.name }));
-      overlay.appendChild(el('span', { class: 'fan-card__rating', text: `★ ${p.rating.toFixed(1)} · ${p.subcategory}` }));
-      card.appendChild(overlay);
-      card.addEventListener('mouseenter', () => {
-        if (fanState.animating) return;
-        if (fanState.leaveTimer) { clearTimeout(fanState.leaveTimer); fanState.leaveTimer = null; }
-        const visible = fanVisibleMap(fanState.center, places.length);
-        const slot = visible.get(i);
-        if (slot !== undefined && fanState.hovered !== slot) {
-          fanState.hovered = slot;
-          fanUpdate(slot);
-        }
-      });
-      card.addEventListener('focus', () => {
-        const visible = fanVisibleMap(fanState.center, places.length);
-        const slot = visible.get(i);
-        if (slot !== undefined) { fanState.hovered = slot; fanUpdate(slot); }
-      });
-      cardsBox.appendChild(card);
-      fanState.els.push(card);
-    });
-    // Pagination
-    const pag = el('div', { class: 'fan-hero__pagination' });
-    const leftBtn = el('button', { class: 'fan-arrow', type: 'button', 'aria-label': '上一個', onclick: () => fanCycle('left'), text: '‹' });
-    const dotsBox = el('div', { class: 'fan-dots', id: 'fan-dots' });
-    fanState.dotEls = [];
-    places.forEach((_, i) => {
-      const d = el('button', {
-        class: 'fan-dot' + (i === 0 ? ' is-active' : ''),
-        type: 'button',
-        'aria-label': `跳到第 ${i + 1} 個`,
-        onclick: () => {
-          if (i === fanState.center) return;
-          const dir = i > fanState.center ? 'right' : 'left';
-          fanState.center = i;
-          fanState.animating = true;
-          fanUpdate(fanState.hovered);
-          setTimeout(() => { fanState.animating = false; }, 620);
-        }
-      });
-      dotsBox.appendChild(d);
-      fanState.dotEls.push(d);
-    });
-    const rightBtn = el('button', { class: 'fan-arrow', type: 'button', 'aria-label': '下一個', onclick: () => fanCycle('right'), text: '›' });
-    pag.appendChild(leftBtn);
-    pag.appendChild(dotsBox);
-    pag.appendChild(rightBtn);
-    stage.appendChild(cardsBox);
-    stage.appendChild(pag);
-    // Hover-off handler
-    cardsBox.addEventListener('mouseleave', () => {
-      if (fanState.leaveTimer) clearTimeout(fanState.leaveTimer);
-      fanState.leaveTimer = setTimeout(() => { fanState.hovered = null; fanUpdate(null); }, 60);
-    });
-    return stage;
-  }
-  function renderFanHero(container) {
-    const top7Ids = (PLACES_DATA.top7 || []).filter(Boolean);
-    const places = top7Ids.map(id => PLACES_DATA.places.find(p => p.id === id)).filter(Boolean);
-    if (!places.length) return;
-    const hero = el('section', { class: 'fan-hero', 'aria-label': 'Top 7 編輯精選' });
-    const head = el('header', { class: 'fan-hero__head' });
-    const titleBox = el('h2', { class: 'fan-hero__title' });
-    titleBox.appendChild(el('span', { class: 'fan-hero__title-icon', 'aria-hidden': 'true', text: '✦' }));
-    titleBox.appendChild(el('span', { text: 'Top 7 編輯精選' }));
-    titleBox.appendChild(el('span', { class: 'fan-hero__title-count', text: String(places.length) }));
-    head.appendChild(titleBox);
-    head.appendChild(el('p', { class: 'fan-hero__sub', text: '主揪 Match 為你揀嘅 7 個必去地方 · 撳箭嘴或者 dot 切換 · hover 試吓' }));
-    hero.appendChild(head);
-    hero.appendChild(fanBuild(places));
-    container.appendChild(hero);
-    // Initial layout + entry stagger
-    requestAnimationFrame(() => {
-      fanState.els.forEach((el, i) => {
-        const total = fanState.els.length;
-        const slot = fanVisibleMap(0, total).get(i);
-        if (slot === undefined) return;
-        const base = fanSlotConfig(total, slot);
-        const mult = fanResponsiveMult(window.innerWidth);
-        // start from below + small scale
-        el.style.transition = 'none';
-        el.style.transform = `translate(calc(-50% + 0rem), calc(-50% + 14rem)) rotate(0deg) scale(0.5)`;
-        el.style.opacity = '0';
-      });
-      requestAnimationFrame(() => {
-        fanState.els.forEach((el, i) => {
-          el.style.transition = '';
-        });
-        fanState.els.forEach((el, i) => {
-          setTimeout(() => fanUpdate(null), 80 + i * 60);
-        });
-      });
-    });
-  }
-  let fanResizeTimer = null;
-  window.addEventListener('resize', () => {
-    if (!fanState.els.length) return;
-    clearTimeout(fanResizeTimer);
-    fanResizeTimer = setTimeout(() => fanUpdate(fanState.hovered), 80);
-  });
-
   function renderGrid() {
     const grid = $('#grid');
     grid.innerHTML = '';
@@ -2638,8 +2447,6 @@ button:focus-visible { outline-offset: 1px; }
     const sortByRating = arr => arr.slice().sort((a, b) => b.rating - a.rating);
 
     if (view.tab === 'all') {
-      // Top 7 fan hero above the category grid
-      renderFanHero(grid);
       // Group by category so 同類排埋一齊 (美食還美食)
       for (const sec of CATEGORY_SECTIONS) {
         const inGroup = sortByRating(places.filter(p => p.category === sec.id));
@@ -2739,9 +2546,8 @@ button:focus-visible { outline-offset: 1px; }
       body.appendChild(mt);
     }
     body.appendChild(el('p', { class: 'card__desc', text: p.description }));
-    // Footer
-    const footer = el('div', { class: 'card__footer' });
-    const voters = el('div', { class: 'voters' });
+    // Footer — voters count line
+    const voters = el('div', { class: 'card__voters' });
     const voteList = getVotes(p.id);
     if (voteList.length > 0) {
       const votersList = el('div', { class: 'voters__list' });
@@ -2752,20 +2558,20 @@ button:focus-visible { outline-offset: 1px; }
       voters.appendChild(votersList);
       voters.appendChild(el('span', { class: 'voters__count', text: `${voteList.length} 票` }));
     } else {
-      voters.appendChild(el('span', { class: 'voters__count', style: 'color:var(--ink-faint)', text: '仲未有人投' }));
+      voters.appendChild(el('span', { class: 'voters__count voters__count--empty', text: '仲未有人投' }));
     }
-    footer.appendChild(voters);
-    // Vote button
+    body.appendChild(voters);
+    // Vote button — full-width, prominent
     const myVoted = hasMyVote(p.id);
     const voteBtn = el('button', {
       class: 'btn-vote' + (myVoted ? ' is-voted' : ''),
       'aria-pressed': myVoted ? 'true' : 'false',
+      'aria-label': myVoted ? `已投畀 ${p.name} · 撳取消` : `投畀 ${p.name}`,
       onclick: e => { e.stopPropagation(); handleVoteClick(p.id, voteBtn); }
     });
     voteBtn.appendChild(el('span', { class: 'btn-vote__icon', text: myVoted ? '♥' : '♡' }));
-    voteBtn.appendChild(el('span', { text: myVoted ? '已投' : '投' }));
-    footer.appendChild(voteBtn);
-    body.appendChild(footer);
+    voteBtn.appendChild(el('span', { text: myVoted ? '已投 · 撳取消' : '投畀呢度' }));
+    body.appendChild(voteBtn);
     card.appendChild(body);
 
     // Expand section
@@ -3013,6 +2819,13 @@ button:focus-visible { outline-offset: 1px; }
         okClass: 'modal__ok modal__ok--danger',
         onOk: logout
       });
+    } else if (action === 'overview') {
+      view.tab = 'overview';
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (action === 'maps') {
+      const q = PLACES_DATA.places.map(p => p.name).join(' | ');
+      window.open(`https://www.google.com/maps/search/${encodeURIComponent(q)}`, '_blank');
     } else if (action === 'about') $('#about-modal').showModal();
   });
 
