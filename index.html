@@ -398,21 +398,61 @@ a:hover { text-decoration: underline; }
 }
 .chip__icon { font-size: 12px; }
 
-/* ====== GRID ====== */
+/* ====== GRID + SECTIONS ====== */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-  padding: 20px;
+  display: flex; flex-direction: column;
+  gap: 36px;
+  padding: 20px 20px 80px;
   max-width: 1200px;
   margin: 0 auto;
 }
 .grid--overview {
+  display: grid;
   grid-template-columns: 1fr;
   max-width: 800px;
+  gap: 16px;
 }
 @media (min-width: 720px) {
   .grid--overview { grid-template-columns: 1fr 1fr; }
+}
+.section { display: flex; flex-direction: column; gap: 14px; }
+.section__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 10px;
+}
+.section__headline { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+.section__icon { font-size: 18px; line-height: 1; }
+.section__title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.section__count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.section__hint {
+  font-size: 12px;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  text-align: right;
+  flex-shrink: 0;
+}
+.section__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
 }
 .empty {
   grid-column: 1 / -1;
@@ -447,9 +487,7 @@ a:hover { text-decoration: underline; }
   scroll-margin-top: 140px;
 }
 .card:hover { transform: translateY(-2px); border-color: var(--ink-faint); }
-.card--featured { grid-column: span 2; }
-.card--featured .card__media { aspect-ratio: 16/9; }
-@media (max-width: 720px) { .card--featured { grid-column: auto; } }
+.card--featured .card__media { aspect-ratio: 4/3; }
 .card__media {
   position: relative;
   aspect-ratio: 4/3;
@@ -2152,10 +2190,17 @@ button:focus-visible { outline-offset: 1px; }
     }
   }
 
+  const CATEGORY_SECTIONS = [
+    { id: 'restaurant', icon: '🍜', title: '餐廳',     hint: '順德菜 · 私房菜 · 早餐 · 甜品' },
+    { id: 'attraction', icon: '🎡', title: '景點',     hint: '商場 · 冰雪王國 · 海立方 · 漁人碼頭' },
+    { id: 'nightlife',  icon: '🎤', title: '夜店 · KTV', hint: '唱 K · 酒吧' },
+    { id: 'wellness',   icon: '💆', title: '養生 · SPA', hint: '沐足 · 按摩 · K歌沐足' }
+  ];
+
   function renderGrid() {
     const grid = $('#grid');
     grid.innerHTML = '';
-    grid.className = view.tab === 'overview' ? 'grid grid--overview' : 'grid';
+    grid.className = 'grid' + (view.tab === 'overview' ? ' grid--overview' : '');
 
     if (view.tab === 'overview') {
       renderOverview(grid);
@@ -2175,16 +2220,36 @@ button:focus-visible { outline-offset: 1px; }
       grid.appendChild(empty);
       return;
     }
-    // Sort: featured first, then by rating desc
-    const sorted = places.slice().sort((a, b) => {
-      const af = PLACES_DATA.featured.includes(a.id) ? 1 : 0;
-      const bf = PLACES_DATA.featured.includes(b.id) ? 1 : 0;
-      if (af !== bf) return bf - af;
-      return b.rating - a.rating;
-    });
-    for (const p of sorted) {
-      grid.appendChild(renderCard(p));
+    const sortByRating = arr => arr.slice().sort((a, b) => b.rating - a.rating);
+
+    if (view.tab === 'all') {
+      // Group by category so 同類排埋一齊 (美食還美食)
+      for (const sec of CATEGORY_SECTIONS) {
+        const inGroup = sortByRating(places.filter(p => p.category === sec.id));
+        if (inGroup.length === 0) continue;
+        const section = el('section', { class: 'section', 'aria-label': sec.title });
+        const head = el('header', { class: 'section__head' });
+        const hl = el('div', { class: 'section__headline' });
+        hl.appendChild(el('span', { class: 'section__icon', 'aria-hidden': 'true', text: sec.icon }));
+        hl.appendChild(el('h2', { class: 'section__title', text: sec.title }));
+        hl.appendChild(el('span', { class: 'section__count', text: String(inGroup.length) }));
+        head.appendChild(hl);
+        head.appendChild(el('p', { class: 'section__hint', text: sec.hint }));
+        section.appendChild(head);
+        const inner = el('div', { class: 'section__grid' });
+        for (const p of inGroup) inner.appendChild(renderCard(p));
+        section.appendChild(inner);
+        grid.appendChild(section);
+      }
+      return;
     }
+    // Single category tab: flat grid (no inner section header — tab itself labels it)
+    const sorted = sortByRating(places);
+    const section = el('section', { class: 'section' });
+    const inner = el('div', { class: 'section__grid' });
+    for (const p of sorted) inner.appendChild(renderCard(p));
+    section.appendChild(inner);
+    grid.appendChild(section);
   }
 
   function renderCard(p) {
