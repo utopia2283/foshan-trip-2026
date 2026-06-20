@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#C8362A">
-<title>佛山順德容桂 3 日遊 · 投票站</title>
+<title>佛山順德容桂 3 日遊 · 投票</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
@@ -1096,7 +1096,7 @@ button:focus-visible { outline-offset: 1px; }
   <div class="login__card">
     <div class="login__logo" aria-hidden="true">🏮</div>
     <h1 id="login-title" class="login__title">佛山順德容桂 3 日遊</h1>
-    <p class="login__subtitle">投票站 · 6/30 - 7/2</p>
+    <p class="login__subtitle">投票 · 6/30 - 7/2</p>
     <p class="login__hint">揀你個名 → 投你鍾意嘅地方</p>
     <div class="login__users" id="login-users" role="listbox" aria-label="揀你個名"></div>
     <details class="login__fallback">
@@ -1106,11 +1106,11 @@ button:focus-visible { outline-offset: 1px; }
           <span>英文名</span>
           <input type="text" id="login-name" placeholder="例: Match / Carrie" autocomplete="off" autocapitalize="off" autocorrect="off" required>
         </label>
-        <button type="submit" class="btn btn--primary btn--block btn--full" id="login-submit">開始投票 →</button>
+        <button type="submit" class="btn btn--primary btn--block btn--full" id="login-submit">開始投 →</button>
         <p class="login__error" id="login-error" role="alert" aria-live="polite"></p>
       </form>
     </details>
-    <p class="login__help">主揪 Match 喺度加新朋友 · 撳 ⋯ 睇主揪後台</p>
+    <p class="login__help">搞手 Match 喺度加新朋友 · 撳 ⋯ 睇搞手後台</p>
   </div>
 </section>
 
@@ -1132,7 +1132,7 @@ button:focus-visible { outline-offset: 1px; }
     <div class="welcome__primary">
       <div class="welcome__progress">
         <div class="welcome__progress-num" id="welcome-progress-num">0/30</div>
-        <div class="welcome__progress-bar" role="progressbar" aria-label="你的投票進度">
+        <div class="welcome__progress-bar" role="progressbar" aria-label="你嘅投票進度">
           <div class="welcome__progress-fill" id="welcome-progress-fill"></div>
         </div>
         <div class="welcome__progress-text" id="welcome-progress-text">你投咗 0 個 · 仲有 30 個未揀好</div>
@@ -1166,11 +1166,11 @@ button:focus-visible { outline-offset: 1px; }
     <div class="drawer__title">選單</div>
   </div>
   <ul class="drawer__list">
-    <li class="drawer__item--org" id="drawer-overview-item" hidden><button class="drawer__item" data-action="overview"><span class="drawer__item-icon">📊</span> 主揪總覽</button></li>
+    <li class="drawer__item--org" id="drawer-overview-item" hidden><button class="drawer__item" data-action="overview"><span class="drawer__item-icon">📊</span> 搞手總覽</button></li>
     <li><button class="drawer__item" data-action="maps"><span class="drawer__item-icon">🗺</span> 全部地點地圖</button></li>
     <li><button class="drawer__item" data-action="export"><span class="drawer__item-icon">📤</span> 匯出 JSON</button></li>
     <li><button class="drawer__item" data-action="import"><span class="drawer__item-icon">📥</span> 匯入 JSON</button></li>
-    <li><button class="drawer__item" data-action="switch"><span class="drawer__item-icon">🔄</span> 切換用戶</button></li>
+    <li><button class="drawer__item" data-action="switch"><span class="drawer__item-icon">🔄</span> 換人</button></li>
     <li><button class="drawer__item" data-action="about"><span class="drawer__item-icon">ℹ️</span> 關於本站</button></li>
   </ul>
 </aside>
@@ -1209,9 +1209,9 @@ button:focus-visible { outline-offset: 1px; }
     <h3 class="modal__title" id="about-title">關於本站</h3>
   </div>
   <div class="modal__body" style="font-size:13px;">
-    <p>佛山順德容桂 3 日遊 · 投票站</p>
+    <p>佛山順德容桂 3 日遊 · 投票</p>
     <p>6/30 - 7/2 · 同 6 個朋友</p>
-    <p style="color:var(--ink-faint);font-size:12px;">資料存喺你個瀏覽器 localStorage,離線都用得。每個裝置獨立投票,記得匯出 JSON 畀主揪合併。</p>
+    <p style="color:var(--ink-faint);font-size:12px;">資料存喺你個瀏覽器 localStorage,離線都用得。每個裝置獨立投票,記得匯出 JSON 畀搞手合併。</p>
   </div>
   <div class="modal__actions">
     <button class="modal__ok" id="about-close">關閉</button>
@@ -2217,12 +2217,12 @@ button:focus-visible { outline-offset: 1px; }
         class: 'login__user' + (u.role === 'organizer' ? ' login__user--organizer' : ''),
         type: 'button',
         role: 'option',
-        'aria-label': `${u.name} · ${u.role === 'organizer' ? '主揪' : '投票者'}`,
+        'aria-label': `${u.name} · ${u.role === 'organizer' ? '搞手' : '投票人'}`,
         onclick: () => { nameInput.value = u.name; tryLogin(); }
       });
       btn.appendChild(el('span', { class: 'login__user-avatar', text: u.avatar }));
       btn.appendChild(el('span', { class: 'login__user-name', text: u.name }));
-      btn.appendChild(el('span', { class: 'login__user-role', text: u.role === 'organizer' ? '主揪' : '投票者' }));
+      btn.appendChild(el('span', { class: 'login__user-role', text: u.role === 'organizer' ? '搞手' : '投票人' }));
       box.appendChild(btn);
     }
   }
@@ -2243,10 +2243,10 @@ button:focus-visible { outline-offset: 1px; }
         cooldownUntil = Date.now() + LOGIN_COOLDOWN_MS;
         loginAttempts = 0;
         submitBtn.disabled = true;
-        showError(`撞錯太多次,掣鎖咗 30 秒,問吓主揪 ${USERS_DATA.organizer}`);
+        showError(`撞錯太多次,掣鎖咗 30 秒,問吓搞手 ${USERS_DATA.organizer}`);
         setTimeout(() => { submitBtn.disabled = false; clearError(); }, LOGIN_COOLDOWN_MS);
       } else {
-        showError(`搵唔到「${name}」呢個名,問吓主揪 ${USERS_DATA.organizer} 確認 (剩 ${LOGIN_MAX_ATTEMPTS - loginAttempts} 次)`);
+        showError(`搵唔到「${name}」呢個名,問吓搞手 ${USERS_DATA.organizer} 問清楚 (剩 ${LOGIN_MAX_ATTEMPTS - loginAttempts} 次)`);
       }
       return;
     }
@@ -2271,7 +2271,7 @@ button:focus-visible { outline-offset: 1px; }
     // Auto-show organizer tip on first login
     if (isOrganizer() && !localStorage.getItem('foshan_tip_shown')) {
       localStorage.setItem('foshan_tip_shown', '1');
-      setTimeout(() => showToast('你係主揪,記得去「總覽」tab 睇晒所有人投票 ☺', 'success'), 800);
+      setTimeout(() => showToast('你係搞手,記得去「總覽」tab 睇晒所有人投票 ☺', 'success'), 800);
     }
   }
 
@@ -2301,10 +2301,10 @@ button:focus-visible { outline-offset: 1px; }
     const roleEl = $('#appbar-role');
     roleEl.innerHTML = '';
     if (u.role === 'organizer') {
-      roleEl.appendChild(el('span', { class: 'role-chip', text: '主揪' }));
+      roleEl.appendChild(el('span', { class: 'role-chip', text: '搞手' }));
       roleEl.appendChild(el('span', { text: '睇總覽' }));
     } else {
-      roleEl.appendChild(el('span', { text: '投票嘅人' }));
+      roleEl.appendChild(el('span', { text: '投票人' }));
     }
     const peers = $('#appbar-peers');
     peers.innerHTML = '';
@@ -2367,7 +2367,7 @@ button:focus-visible { outline-offset: 1px; }
   function renderTabs() {
     const tabsEl = $('#tabs');
     tabsEl.innerHTML = '';
-    // 3 use-case tabs instead of 5 category tabs. 主揪總覽 moved to ⋯ menu.
+    // 3 use-case tabs instead of 5 category tabs. 搞手總覽 moved to ⋯ menu.
     const tabs = [
       { id: 'all', label: '全部', icon: '✦' },
       { id: 'restaurant', label: '想食', icon: '🍜' },
@@ -2669,7 +2669,7 @@ button:focus-visible { outline-offset: 1px; }
       for (const arr of Object.values(state.comments)) cCount += arr.filter(c => c.user === u.name).length;
       const card = el('div', { class: 'ov-user' });
       card.appendChild(el('div', { class: 'ov-user__avatar', text: u.avatar }));
-      card.appendChild(el('div', { class: 'ov-user__name', text: u.name + (u.role === 'organizer' ? ' (主揪)' : '') }));
+      card.appendChild(el('div', { class: 'ov-user__name', text: u.name + (u.role === 'organizer' ? ' (搞手)' : '') }));
       card.appendChild(el('div', { class: 'ov-user__stat', text: `${vCount} 票 · ${cCount} 條留言` }));
       userGrid.appendChild(card);
     }
@@ -2718,7 +2718,7 @@ button:focus-visible { outline-offset: 1px; }
     // Try clipboard first
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(json).then(
-        () => showToast('已複製,傳畀主揪啦 ✓', 'success'),
+        () => showToast('已複製,傳畀搞手啦 ✓', 'success'),
         () => fallbackDownload(json)
       );
     } else {
@@ -2814,7 +2814,7 @@ button:focus-visible { outline-offset: 1px; }
     else if (action === 'switch') {
       confirmModal({
         title: '轉用戶?',
-        body: `確定登出 ${state.currentUser}?你嘅投票會留住,下次再登入仲喺度。`,
+        body: `登出 ${state.currentUser}?你嘅投票會留住,下次再登入仲喺度。`,
         okText: '切換',
         okClass: 'modal__ok modal__ok--danger',
         onOk: logout
