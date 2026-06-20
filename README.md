@@ -120,7 +120,7 @@ open "/Users/match/Documents/TVC Director/foshan-trip-2026/index.html"
 ## 技術
 
 - 單檔 HTML,無 build,無後端
-- 資料 hardcode(25 個地點)
+- 資料 hardcode(30 個地點 + 8 個伴手禮)
 - 投票 / 留言存 `localStorage`(每個裝置獨立)
 - Noto Serif TC + Noto Sans TC 字體(Google Fonts)
 - 真實 Unsplash 食物相

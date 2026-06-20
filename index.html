@@ -513,6 +513,26 @@ a:hover { text-decoration: underline; }
   color: var(--brand-dark);
   border: 1.5px solid var(--brand);
 }
+.welcome__weather {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+.weather-day {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+.weather-day__icon { font-size: 16px; line-height: 1; }
+.weather-day__date { color: var(--ink-muted); font-size: 11px; }
+.weather-day__temp { color: var(--ink); font-weight: 600; }
+.weather-day__rain { color: #3b82f6; font-size: 11px; }
+.weather-day--rain .weather-day__icon::after { content: ' ☔'; font-size: 10px; }
 
 /* ====== GRID + SECTIONS ====== */
 .grid {
@@ -567,9 +587,69 @@ a:hover { text-decoration: underline; }
 }
 .section__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 24px;
 }
+@media (max-width: 720px) {
+  .section__grid { grid-template-columns: 1fr; gap: 16px; }
+}
+.souv-card {
+  display: flex; flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.souv-card:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(26,22,18,0.08); }
+.souv-card__media { position: relative; aspect-ratio: 16/10; background: var(--surface); overflow: hidden; }
+.souv-card__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.souv-card__fallback {
+  position: absolute; inset: 0; display: none;
+  align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--brand-soft), var(--accent));
+  color: var(--brand-dark);
+  font-family: var(--font-display); font-size: 20px; font-weight: 700;
+  text-align: center; padding: 20px;
+}
+.souv-card__cat {
+  position: absolute; top: 12px; left: 12px;
+  background: rgba(255,255,255,0.95);
+  color: var(--ink);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px; font-weight: 500;
+  backdrop-filter: blur(4px);
+}
+.souv-card__body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; }
+.souv-card__name {
+  font-family: var(--font-display); font-size: 18px; font-weight: 700;
+  margin: 0; color: var(--ink); letter-spacing: -0.01em;
+}
+.souv-card__meta {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--brand); font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.souv-card__desc { font-size: 13px; color: var(--ink-muted); line-height: 1.5; margin: 0; }
+.souv-card__where {
+  display: flex; align-items: flex-start; gap: 8px;
+  margin-top: 4px; padding: 10px 12px;
+  background: var(--brand-soft);
+  border-radius: 8px;
+  border: 1px dashed var(--brand);
+}
+.souv-card__where-icon { font-size: 18px; line-height: 1; }
+.souv-card__where-info { flex: 1; }
+.souv-card__where-shop { font-size: 13px; font-weight: 600; color: var(--brand-dark); }
+.souv-card__where-desc { font-size: 11px; color: var(--ink-muted); margin-top: 1px; }
+.souv-card__rating {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 12px; color: var(--ink-muted);
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+}
+.souv-card__star { color: #fbbf24; font-size: 14px; }
 .empty {
   grid-column: 1 / -1;
   padding: 48px 24px;
@@ -606,7 +686,7 @@ a:hover { text-decoration: underline; }
 .card--featured .card__media { aspect-ratio: 4/3; }
 .card__media {
   position: relative;
-  aspect-ratio: 4/3;
+  aspect-ratio: 4/5;
   background: var(--surface);
   overflow: hidden;
 }
@@ -639,6 +719,28 @@ a:hover { text-decoration: underline; }
   letter-spacing: 0.02em;
   backdrop-filter: blur(4px);
 }
+.card__title-overlay {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 28px 12px 12px;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.72) 100%);
+  color: white;
+  pointer-events: none;
+}
+.card__title-overlay .card__name {
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  margin: 0 0 2px;
+  -webkit-line-clamp: 2;
+}
+.card__title-overlay .card__sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.85);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  display: flex; align-items: center; gap: 6px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.card__title-overlay .card__sub-star { color: #fbbf24; font-size: 12px; }
 .card__badges {
   position: absolute; top: 12px; right: 12px;
   display: flex; flex-direction: column; gap: 4px;
@@ -814,6 +916,134 @@ a:hover { text-decoration: underline; }
   margin-left: auto;
 }
 .btn-expand:hover { background: var(--surface); color: var(--ink); }
+.card__gallery {
+  display: flex;
+  gap: 6px;
+  margin: 0 0 12px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+.card__gallery::-webkit-scrollbar { height: 4px; }
+.card__gallery::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+.card__gallery-img {
+  flex-shrink: 0;
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 150ms ease, transform 100ms ease;
+}
+.card__gallery-img:hover { border-color: var(--brand); }
+.card__gallery-img.is-active { border-color: var(--brand); border-width: 2px; }
+.card__gallery-count {
+  flex-shrink: 0;
+  width: 88px;
+  height: 88px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  border: 1px dashed var(--line);
+}
+
+.card__lightbox {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 9999;
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.card__lightbox.is-open { display: flex; }
+.card__lightbox-img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.card__lightbox-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 40px; height: 40px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: 0;
+  font-size: 18px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.card__lightbox-close:hover { background: rgba(255,255,255,0.2); }
+.card__lightbox-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 0;
+  font-size: 20px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.card__lightbox-nav:hover { background: rgba(255,255,255,0.25); }
+.card__lightbox-prev { left: 16px; }
+.card__lightbox-next { right: 16px; }
+.card__lightbox-counter {
+  position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+  color: rgba(255,255,255,0.7);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.card__tabs {
+  display: flex;
+  border-bottom: 1px solid var(--line);
+  margin: 12px -14px 10px;
+  padding: 0 14px;
+  gap: 4px;
+}
+.card__tab {
+  flex: 1;
+  background: 0; border: 0;
+  padding: 8px 4px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 150ms ease, border-color 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.card__tab:hover { color: var(--ink); }
+.card__tab.is-active { color: var(--brand); border-bottom-color: var(--brand); }
+.card__tab-pane { display: none; }
+.card__tab-pane.is-active { display: block; }
+.card__dianping-link {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 150ms ease, background 150ms ease;
+  margin-bottom: 10px;
+}
+.card__dianping-link:hover { border-color: var(--brand); background: var(--brand-soft); }
+.card__dianping-link-main { display: flex; flex-direction: column; gap: 2px; }
+.card__dianping-link-name { font-size: 13px; font-weight: 600; }
+.card__dianping-link-meta { font-size: 11px; color: var(--ink-muted); font-family: var(--font-mono); }
+.card__dianping-link-arrow { font-size: 18px; color: var(--brand); }
+
 .card__expand {
   padding: 0 16px 16px;
   display: none;
@@ -826,6 +1056,14 @@ a:hover { text-decoration: underline; }
 .card__hours {
   font-size: 12px; color: var(--ink-muted);
   display: flex; align-items: center; gap: 6px;
+}
+.card__transport {
+  display: flex; gap: 14px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
 }
 .card__address {
   font-size: 12px; color: var(--ink-muted);
@@ -1150,6 +1388,9 @@ button:focus-visible { outline-offset: 1px; }
       <div class="welcome__countdown" id="welcome-countdown"></div>
       <div class="welcome__cta">撳下面任何卡片嘅 <span class="welcome__cta-btn">♡ 投</span> 開始投</div>
     </div>
+    <div class="welcome__weather" id="welcome-weather" hidden>
+      <div style="font-size:11px;color:var(--ink-muted);align-self:center;margin-right:4px;">🌤 佛山天氣</div>
+    </div>
   </div>
 
   <nav class="tabs" id="tabs" role="tablist" aria-label="分類"></nav>
@@ -1249,8 +1490,7 @@ button:focus-visible { outline-offset: 1px; }
 }
 </script>
 
-<script type="application/json" id="places-data">
-{
+<script type="application/json" id="places-data">{
   "version": 1,
   "featured": [
     "zhuroupo",
@@ -1264,6 +1504,120 @@ button:focus-visible { outline-offset: 1px; }
     "meiweiju",
     "shaozhubiao",
     "tangfeng"
+  ],
+  "souvenirs": [
+    {
+      "id": "manggong",
+      "name": "盲公餅",
+      "imageIds": [
+        "1558961363-fa8fdf82db35",
+        "1593508514355-3b3a9b1a8e95"
+      ],
+      "price": "¥25-45 / 320g 袋",
+      "category": "餅",
+      "whereBuy": "合記餅家 · 京華店(禪城)",
+      "shops": "馳名老字號,佛山手信第一位",
+      "description": "盲公餅係佛山最有名嘅手信,200 多年歷史,用糯米、糖、花生、芝麻、豬肉巧製,獨立包裝方便帶。盲公陳氏第五代傳人仲喺度做。",
+      "rating": 4.5
+    },
+    {
+      "id": "chencunfen",
+      "name": "陳村粉",
+      "imageIds": [
+        "1604908176997-125f25cc6f3d",
+        "1626804475297-41608ea09aeb"
+      ],
+      "price": "¥18-35 / 真空包",
+      "category": "粉麵",
+      "whereBuy": "黃但記 · 陳村老店(順德)",
+      "shops": "順德陳村名物,薄過紙但滑過絲",
+      "description": "陳村粉有 90 多年歷史,以薄、爽、滑、軟聞名。真空包裝可保幾個月,翻屋企蒸 2 分鐘就食得。星級酒店都用佢做菜。",
+      "rating": 4.6
+    },
+    {
+      "id": "shuangpi",
+      "name": "雙皮奶禮盒",
+      "imageIds": [
+        "1565299624946-b28f40a0ae38",
+        "1551024506-0bcc1a856f0e"
+      ],
+      "price": "¥68-128 / 6 盒",
+      "category": "甜品",
+      "whereBuy": "民信老鋪 · 華蓋路老店",
+      "shops": "順德甜品代表,原盅玻璃樽裝",
+      "description": "民信老鋪 1930 年創立,雙皮奶用本地水牛奶整,奶皮兩層、配薑汁 / 紅豆 / 蓮子。禮盒裝原盅玻璃樽,雪住帶返香港都仲滑。",
+      "rating": 4.7
+    },
+    {
+      "id": "jiujiangjiandui",
+      "name": "九江煎堆",
+      "imageIds": [
+        "1601050690597-df0568f70950",
+        "1576618148400-f54bed99fcfd"
+      ],
+      "price": "¥35-55 / 半打裝",
+      "category": "餅",
+      "whereBuy": "九江酒廠 · 南海九江鎮",
+      "shops": "南海非遺,皮脆餡糯",
+      "description": "九江煎堆大過拳頭,糯米粉皮炸到金黃酥脆,入面係爆芝麻花生糖餡,咬開「咔嚓」一聲。南海非遺,順德行車去九江 30 分鐘。",
+      "rating": 4.4
+    },
+    {
+      "id": "dalangyejijuan",
+      "name": "大良野雞卷",
+      "imageIds": [
+        "1601050690597-df0568f70950",
+        "1565299624946-b28f40a0ae38"
+      ],
+      "price": "¥48 / 半打裝",
+      "category": "肉食",
+      "whereBuy": "大良 · 鳳城酒店手信店",
+      "shops": "順德傳統手工,脆皮捲肉餡",
+      "description": "大良野雞卷其實冇雞,用網油包豬肉、臘肉、香菇、蝦米,酥炸。鳳城酒店有現做嘅,亦有真空包版。配甜麵醬食最正。",
+      "rating": 4.3
+    },
+    {
+      "id": "daliangchaonianiu",
+      "name": "大良炒牛奶",
+      "imageIds": [
+        "1551024506-0bcc1a856f0e",
+        "1626804475297-41608ea09aeb"
+      ],
+      "price": "¥38 / 盒",
+      "category": "甜品",
+      "whereBuy": "大良 · 老字號食府",
+      "shops": "順德廚藝絕活,軟滑如絲",
+      "description": "大良炒牛奶係順德廚藝絕活,水牛奶同蛋白鑊炒,軟滑如絲、入口即溶,從來冇外賣做到堂食嘅水準。真空包可以帶返去但要即刻翻熱。",
+      "rating": 4.5
+    },
+    {
+      "id": "fengchengyupijiao",
+      "name": "鳳城魚皮角",
+      "imageIds": [
+        "1604908176997-125f25cc6f3d",
+        "1558961363-fa8fdf82db35"
+      ],
+      "price": "¥32-58 / 12 隻裝",
+      "category": "粉麵",
+      "whereBuy": "馮不記 · 大良老店",
+      "shops": "魚皮做皮,餡鮮湯清",
+      "description": "鳳城魚皮角用鯪魚肉打成皮,包豬肉餡,皮薄餡靚。順德人過年過節必備。真空包可冷藏 7 日,翻熱配高湯食最正。",
+      "rating": 4.4
+    },
+    {
+      "id": "guangshiyou",
+      "name": "順德醬油",
+      "imageIds": [
+        "1604908176997-125f25cc6f3d",
+        "1576618148400-f54bed99fcfd"
+      ],
+      "price": "¥25-65 / 樽",
+      "category": "調味",
+      "whereBuy": "萬和醬園 · 杏壇鎮",
+      "shops": "順德非遺,百年老字號",
+      "description": "順德醬油傳統曬釀 180 日以上,色澤紅亮、醬香濃郁。生抽、老抽、曬油各有風味。萬和醬園 1848 年起,做醬油做到國家級非遺。",
+      "rating": 4.6
+    }
   ],
   "places": [
     {
@@ -1390,8 +1744,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "13:00–23:00",
       "michelin": false,
       "imageIds": [
-        "1559925393-8be0ec4767c8",
-        "1473093295043-cdd812d0e601"
+        "1752552750868-b0b57e545e35",
+        "1757752462906-62c319c5082d"
       ],
       "description": "容桂隱藏甜品店,抹茶控必去,抹茶布丁 QQ 彈彈入口即化,裝修靚打卡一流。",
       "dianping": "https://www.dianping.com/shop/1633685851"
@@ -1468,7 +1822,7 @@ button:focus-visible { outline-offset: 1px; }
       "michelin": false,
       "imageIds": [
         "1519567241046-7f570eee3ce6",
-        "1565299507177-b0ac66763828"
+        "1768329238155-6cabb8bb6463"
       ],
       "description": "2025 年 4 月新開,華潤置地灣西首個重資產項目,340+ 個品牌,超過 50% 順德首店,冷氣全開。"
     },
@@ -1493,8 +1847,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "10:00–22:00",
       "michelin": false,
       "imageIds": [
-        "1502810190503-8303352d0dd1",
-        "1556909114-f6e7ad7d3136"
+        "1759268650009-03c392931f92",
+        "1775737600193-96565fb36dd5"
       ],
       "description": "免費入場,玩樂自選,夜景超靚水舞秀配摩天輪,夜晚影相最正。"
     },
@@ -1518,8 +1872,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "10:00–21:00",
       "michelin": false,
       "imageIds": [
-        "1517823382935-51bfcb0ec6bc",
-        "1576618148400-f54bed99fcfd"
+        "1779110560463-826bafd3d605",
+        "1552418033-d68b553926d2"
       ],
       "description": "室內冰雪樂園,恆溫零下 10 度,大熱天消暑親子首選。"
     },
@@ -1671,7 +2025,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "05:00–11:00",
       "michelin": false,
       "imageIds": [
-        "1572715376701-98568319fd0b"
+        "1572715376701-98568319fd0b",
+        "1414235077428-338989a2e8c0"
       ],
       "description": "順德早餐粥品名店,生滾粥 $10 起,過江腸、生魚片、生腸都係招牌。",
       "dianping": "https://www.dianping.com/search/keyword/%E7%99%BE%E6%90%AD%E7%B2%A5%E7%A5%9E"
@@ -1696,7 +2051,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "06:00–11:00",
       "michelin": false,
       "imageIds": [
-        "1497515114629-f71d768fd07c"
+        "1497515114629-f71d768fd07c",
+        "1547573854-74d2a71d0826"
       ],
       "description": "女粥神主理,生滾粥、炒米粉、腸粉 $10 餘起,街坊早餐之選。",
       "dianping": "https://www.dianping.com/shop/68386631"
@@ -1721,7 +2077,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "11:00–14:00, 17:00–21:00",
       "michelin": true,
       "imageIds": [
-        "1518306727298-4c17e1bf6942"
+        "1759670332534-21a316c53462",
+        "1624174782964-e541742299ee"
       ],
       "description": "均安蒸豬始祖,招牌均安蒸豬 + 三重火半焗半炸燒豬,大食會必去。",
       "dianping": "https://www.dianping.com/shop/1081376907"
@@ -1747,7 +2104,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "11:00–14:00, 17:00–21:00",
       "michelin": false,
       "imageIds": [
-        "1559329007-40df8a9345d8"
+        "1559329007-40df8a9345d8",
+        "1773901344817-537194056c1a"
       ],
       "description": "勒流隱世河鮮私房菜,招牌河三鮮魚球魚卜湯、蒜頭豆豉蒸爽鱔,識食老饕嘅私藏。",
       "dianping": "https://www.dianping.com/shop/10661216"
@@ -1772,7 +2130,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "17:00–02:00",
       "michelin": false,
       "imageIds": [
-        "1551183053-bf91a1d81141"
+        "1551183053-bf91a1d81141",
+        "1551024506-0bcc1a856f0e"
       ],
       "description": "台山生蠔專門店,鮮活直送,招牌雞子鵪鶉蛋撈生蠔、瓦窯雞,宵夜首選。",
       "dianping": "https://www.dianping.com/shop/18989774"
@@ -1799,7 +2158,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "07:30–22:00",
       "michelin": false,
       "imageIds": [
-        "1556909114-f6e7ad7d3136"
+        "1556909114-f6e7ad7d3136",
+        "1551024506-0bcc1a856f0e"
       ],
       "description": "容桂手工點心,蜂巢芋角、龍蝦餃、叉燒酥、煎鹹肉粽、麻糬包都係順德名物嘅手工版。",
       "dianping": "https://www.dianping.com/shop/H2Inufei004mGHlf"
@@ -1825,7 +2185,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "11:00–14:00, 17:00–22:00",
       "michelin": false,
       "imageIds": [
-        "1565299624946-b28f40a0ae38"
+        "1565299624946-b28f40a0ae38",
+        "1576618148400-f54bed99fcfd"
       ],
       "description": "清水牛內臟火鍋專門店,15 款牛部位清水淥,牛脷坑、牛生腸、自家製牛肉丸必試。",
       "dianping": "https://www.dianping.com/shop/16439343"
@@ -1851,7 +2212,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "18:00–02:00",
       "michelin": false,
       "imageIds": [
-        "1559339352-11d035aa65de"
+        "1559339352-11d035aa65de",
+        "1497515114629-f71d768fd07c"
       ],
       "description": "大良宵夜名店,招牌炸雞翼外脆內爆汁(麒麟皮),炒田螺、卜卜蜆、椒鹽骨都一流。",
       "dianping": "https://www.dianping.com/shop/1455671926"
@@ -1875,7 +2237,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "11:00–14:00, 17:00–21:00",
       "michelin": true,
       "imageIds": [
-        "1546069901-ba9599a7e63c"
+        "1546069901-ba9599a7e63c",
+        "1559329007-40df8a9345d8"
       ],
       "description": "百年嶺南老宅入面嘅順德魚生專門店,環境一流,魚生 + 私房菜體驗。",
       "dianping": "https://www.dianping.com/shop/1528704323"
@@ -1899,7 +2262,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "11:00–14:00, 17:00–21:00",
       "michelin": false,
       "imageIds": [
-        "1552566626-52f8b828add9"
+        "1552566626-52f8b828add9",
+        "1606722590583-6951b5ea92ad"
       ],
       "description": "溢和苑錦岩店,順德私房菜,地道風味,適合圍桌大食會。",
       "dianping": "https://www.dianping.com/shop/1294945790"
@@ -1925,7 +2289,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "12:00–02:00",
       "michelin": false,
       "imageIds": [
-        "1571019613454-1cb2f99b2d8b"
+        "1571019613454-1cb2f99b2d8b",
+        "1576618148400-f54bed99fcfd"
       ],
       "description": "容桂 K 歌沐足會所,集沐足、按摩、棋牌、KTV 包廂於一身,行完街食完嘢去鬆一鬆一流。"
     },
@@ -1949,7 +2314,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "11:00–02:00",
       "michelin": false,
       "imageIds": [
-        "1559599101-f09722fb4948"
+        "1559599101-f09722fb4948",
+        "1551183053-bf91a1d81141"
       ],
       "description": "連鎖品牌,招牌影院足道,房入面有投影睇戲,足浴加按摩同步,環境乾淨企理。"
     },
@@ -1973,7 +2339,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "11:00–02:00",
       "michelin": false,
       "imageIds": [
-        "1591343395082-e120087004b4"
+        "1591343395082-e120087004b4",
+        "1525755662778-989d0524087e"
       ],
       "description": "Trip.com 推薦嘅順德高質按摩店,6 間房任揀,泰式 + 精油按摩,房闊有投影,師傅手勢純正唔會推銷。"
     },
@@ -1999,7 +2366,8 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "24 小時",
       "michelin": false,
       "imageIds": [
-        "1571902943202-507ec2618e8f"
+        "1571902943202-507ec2618e8f",
+        "1559329007-40df8a9345d8"
       ],
       "description": "7000 ㎡ 藝術美學空間,可同時容納 600 人,多功能湯泉、汗蒸、足道、SPA、自助餐、影院全配齊,24 小時營業。"
     },
@@ -2023,13 +2391,13 @@ button:focus-visible { outline-offset: 1px; }
       "openHours": "12:00–01:00",
       "michelin": false,
       "imageIds": [
-        "1604881988758-f76ad2f7aac1"
+        "1604881988758-f76ad2f7aac1",
+        "1626804475297-41608ea09aeb"
       ],
       "description": "容桂平價沐足,人均 ¥108,沐足 + 肩頸按摩 + 推拿,行到攰想快快鬆返嘅首選。"
     }
   ]
-}
-</script>
+}</script>
 
 <!-- ====== APP LOGIC ====== -->
 <script>
@@ -2156,6 +2524,7 @@ button:focus-visible { outline-offset: 1px; }
   function placeByCategory(cat) { return PLACES_DATA.places.filter(p => p.category === cat); }
   function visiblePlaces() {
     if (view.tab === 'overview') return [];
+    if (view.tab === 'souvenir') return PLACES_DATA.souvenirs || [];
     if (view.tab === 'all') return PLACES_DATA.places;
     return placeByCategory(view.tab);
   }
@@ -2163,7 +2532,9 @@ button:focus-visible { outline-offset: 1px; }
     return state.currentUser && getUser(state.currentUser)?.role === 'organizer';
   }
   function countByCategory(cat) {
-    return cat === 'all' ? PLACES_DATA.places.length : placeByCategory(cat).length;
+    if (cat === 'all') return PLACES_DATA.places.length + (PLACES_DATA.souvenirs?.length || 0);
+    if (cat === 'souvenir') return (PLACES_DATA.souvenirs?.length || 0);
+    return placeByCategory(cat).length;
   }
 
   // ====== TOAST ======
@@ -2315,9 +2686,63 @@ button:focus-visible { outline-offset: 1px; }
     }
   }
 
+  // Weather — Open-Meteo (free, no key needed)
+  const FOSHAN_LAT = 22.9856;
+  const FOSHAN_LON = 113.1219;
+  const TRIP_DATES = ['2026-06-30', '2026-07-01', '2026-07-02'];
+  const WMO = { 0: '☀️', 1: '🌤', 2: '⛅', 3: '☁️', 45: '🌫', 48: '🌫', 51: '🌦', 53: '🌦', 55: '🌦', 61: '🌧', 63: '🌧', 65: '🌧', 71: '🌨', 73: '🌨', 75: '🌨', 80: '🌦', 81: '🌧', 82: '⛈', 95: '⛈', 96: '⛈', 99: '⛈' };
+  let weatherCache = null;
+  async function loadWeather() {
+    if (weatherCache) return weatherCache;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${FOSHAN_LAT}&longitude=${FOSHAN_LON}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=Asia%2FShanghai&start_date=${TRIP_DATES[0]}&end_date=${TRIP_DATES[2]}`;
+    try {
+      const r = await fetch(url);
+      const j = await r.json();
+      weatherCache = j.daily;
+    } catch (e) {
+      console.warn('Weather fetch failed:', e);
+      weatherCache = null;
+    }
+    return weatherCache;
+  }
+  function renderWeather() {
+    const box = $('#welcome-weather');
+    if (!box) return;
+    const data = weatherCache;
+    box.hidden = false;
+    // Remove old day cards but keep the title
+    const title = box.firstElementChild;
+    box.innerHTML = '';
+    box.appendChild(title);
+    if (!data) {
+      box.appendChild(el('div', { class: 'weather-day', text: '天氣讀取中 / 離線' }));
+      return;
+    }
+    const labels = ['Day 1 · 6/30', 'Day 2 · 7/1', 'Day 3 · 7/2'];
+    for (let i = 0; i < 3; i++) {
+      const max = Math.round(data.temperature_2m_max[i]);
+      const min = Math.round(data.temperature_2m_min[i]);
+      const rain = data.precipitation_probability_max[i] || 0;
+      const code = data.weathercode[i];
+      const icon = WMO[code] || '☀️';
+      const day = el('div', { class: 'weather-day' + (rain >= 50 ? ' weather-day--rain' : '') });
+      day.appendChild(el('span', { class: 'weather-day__icon', text: icon }));
+      const stack = el('div', { style: 'display:flex;flex-direction:column;gap:1px;line-height:1.2;' });
+      stack.appendChild(el('span', { class: 'weather-day__date', text: labels[i] }));
+      stack.appendChild(el('span', { class: 'weather-day__temp', text: `${min}° – ${max}°C` }));
+      if (rain >= 30) {
+        stack.appendChild(el('span', { class: 'weather-day__rain', text: `☔ ${rain}% 雨` }));
+      }
+      day.appendChild(stack);
+      box.appendChild(day);
+    }
+  }
+
   function renderWelcome() {
     const u = getUser(state.currentUser);
     if (!u) return;
+    // Weather (async)
+    loadWeather().then(renderWeather);
     // Progress
     const voted = myVoteCount();
     const total = PLACES_DATA.places.length;
@@ -2367,13 +2792,13 @@ button:focus-visible { outline-offset: 1px; }
   function renderTabs() {
     const tabsEl = $('#tabs');
     tabsEl.innerHTML = '';
-    // 3 use-case tabs instead of 5 category tabs. 搞手總覽 moved to ⋯ menu.
     const tabs = [
       { id: 'all', label: '全部', icon: '✦' },
       { id: 'restaurant', label: '想食', icon: '🍜' },
       { id: 'attraction', label: '想玩', icon: '🎡' },
       { id: 'nightlife', label: '想唱', icon: '🎤' },
-      { id: 'wellness', label: '想hea', icon: '💆' }
+      { id: 'wellness', label: '想hea', icon: '💆' },
+      { id: 'souvenir', label: '想買', icon: '🎁' }
     ];
     for (const t of tabs) {
       const btn = el('button', {
@@ -2417,7 +2842,8 @@ button:focus-visible { outline-offset: 1px; }
     { id: 'restaurant', icon: '🍜', title: '餐廳',     hint: '順德菜 · 私房菜 · 早餐 · 甜品' },
     { id: 'attraction', icon: '🎡', title: '景點',     hint: '商場 · 冰雪王國 · 海立方 · 漁人碼頭' },
     { id: 'nightlife',  icon: '🎤', title: '夜店 · KTV', hint: '唱 K · 酒吧' },
-    { id: 'wellness',   icon: '💆', title: '養生 · SPA', hint: '沐足 · 按摩 · K歌沐足' }
+    { id: 'wellness',   icon: '💆', title: '養生 · SPA', hint: '沐足 · 按摩 · K歌沐足' },
+    { id: 'souvenir',   icon: '🎁', title: '伴手禮',   hint: '盲公餅 · 陳村粉 · 雙皮奶 · 醬油', souvenirs: true }
   ];
 
   function renderGrid() {
@@ -2428,6 +2854,10 @@ button:focus-visible { outline-offset: 1px; }
 
     if (view.tab === 'overview') {
       renderOverview(grid);
+      return;
+    }
+    if (view.tab === 'souvenir') {
+      renderSouvenirs(grid);
       return;
     }
     const places = filterPlaces(visiblePlaces());
@@ -2449,6 +2879,24 @@ button:focus-visible { outline-offset: 1px; }
     if (view.tab === 'all') {
       // Group by category so 同類排埋一齊 (美食還美食)
       for (const sec of CATEGORY_SECTIONS) {
+        if (sec.souvenirs) {
+          const souvenirs = (PLACES_DATA.souvenirs || []).slice().sort((a, b) => b.rating - a.rating);
+          if (souvenirs.length === 0) continue;
+          const section = el('section', { class: 'section', 'aria-label': sec.title });
+          const head = el('header', { class: 'section__head' });
+          const hl = el('div', { class: 'section__headline' });
+          hl.appendChild(el('span', { class: 'section__icon', 'aria-hidden': 'true', text: sec.icon }));
+          hl.appendChild(el('h2', { class: 'section__title', text: sec.title }));
+          hl.appendChild(el('span', { class: 'section__count', text: String(souvenirs.length) }));
+          head.appendChild(hl);
+          head.appendChild(el('p', { class: 'section__hint', text: sec.hint }));
+          section.appendChild(head);
+          const inner = el('div', { class: 'section__grid' });
+          for (const s of souvenirs) inner.appendChild(renderSouvenirCard(s));
+          section.appendChild(inner);
+          grid.appendChild(section);
+          continue;
+        }
         const inGroup = sortByRating(places.filter(p => p.category === sec.id));
         if (inGroup.length === 0) continue;
         const section = el('section', { class: 'section', 'aria-label': sec.title });
@@ -2484,6 +2932,97 @@ button:focus-visible { outline-offset: 1px; }
     }
   }
 
+  // Lightbox for full-size images
+  let lightboxState = { images: [], idx: 0, name: '' };
+  function openLightbox(images, idx, name) {
+    lightboxState = { images, idx, name };
+    renderLightbox();
+  }
+  function renderLightbox() {
+    let box = $('#lightbox');
+    if (!box) {
+      box = el('div', { class: 'card__lightbox', id: 'lightbox' });
+      box.innerHTML = '<button class="card__lightbox-close" aria-label="關閉">✕</button>' +
+                      '<button class="card__lightbox-nav card__lightbox-prev" aria-label="上一張">‹</button>' +
+                      '<img class="card__lightbox-img" alt="">' +
+                      '<button class="card__lightbox-nav card__lightbox-next" aria-label="下一張">›</button>' +
+                      '<div class="card__lightbox-counter"></div>';
+      document.body.appendChild(box);
+      box.querySelector('.card__lightbox-close').addEventListener('click', closeLightbox);
+      box.querySelector('.card__lightbox-prev').addEventListener('click', e => { e.stopPropagation(); lightboxState.idx = (lightboxState.idx - 1 + lightboxState.images.length) % lightboxState.images.length; renderLightbox(); });
+      box.querySelector('.card__lightbox-next').addEventListener('click', e => { e.stopPropagation(); lightboxState.idx = (lightboxState.idx + 1) % lightboxState.images.length; renderLightbox(); });
+      box.addEventListener('click', e => { if (e.target === box) closeLightbox(); });
+    }
+    const { images, idx, name } = lightboxState;
+    box.querySelector('.card__lightbox-img').src = `https://images.unsplash.com/photo-${images[idx]}?w=1200&q=85&auto=format&fit=crop`;
+    box.querySelector('.card__lightbox-img').alt = `${name} ${idx + 1}`;
+    box.querySelector('.card__lightbox-counter').textContent = `${idx + 1} / ${images.length}`;
+    box.classList.add('is-open');
+  }
+  function closeLightbox() {
+    const box = $('#lightbox');
+    if (box) box.classList.remove('is-open');
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft' && $('#lightbox')?.classList.contains('is-open')) { lightboxState.idx = (lightboxState.idx - 1 + lightboxState.images.length) % lightboxState.images.length; renderLightbox(); }
+    if (e.key === 'ArrowRight' && $('#lightbox')?.classList.contains('is-open')) { lightboxState.idx = (lightboxState.idx + 1) % lightboxState.images.length; renderLightbox(); }
+  });
+
+  function renderSouvenirs(container) {
+    const items = visiblePlaces();
+    const section = el('section', { class: 'section' });
+    const head = el('header', { class: 'section__head' });
+    const hl = el('div', { class: 'section__headline' });
+    hl.appendChild(el('span', { class: 'section__icon', 'aria-hidden': 'true', text: '🎁' }));
+    hl.appendChild(el('h2', { class: 'section__title', text: '順德手信 · 帶得走嘅順德味' }));
+    hl.appendChild(el('span', { class: 'section__count', text: String(items.length) }));
+    head.appendChild(hl);
+    head.appendChild(el('p', { class: 'section__hint', text: '真空包裝可帶上飛機 · 部分要冷藏' }));
+    section.appendChild(head);
+    const inner = el('div', { class: 'section__grid' });
+    for (const s of items) inner.appendChild(renderSouvenirCard(s));
+    section.appendChild(inner);
+    container.appendChild(section);
+  }
+
+  function renderSouvenirCard(s) {
+    const card = el('article', { class: 'souv-card', id: 'souv-' + s.id });
+    const media = el('div', { class: 'souv-card__media' });
+    const imgId = s.imageIds && s.imageIds[0];
+    if (imgId) {
+      media.appendChild(el('img', {
+        class: 'souv-card__img',
+        src: `https://images.unsplash.com/photo-${imgId}?w=800&q=80&auto=format&fit=crop`,
+        alt: s.name,
+        loading: 'lazy',
+        onerror: function() { this.style.display = 'none'; this.nextElementSibling.style.display = 'flex'; }
+      }));
+    }
+    media.appendChild(el('div', { class: 'souv-card__fallback', style: 'display:none', text: s.name }));
+    media.appendChild(el('span', { class: 'souv-card__cat', text: s.category }));
+    card.appendChild(media);
+    const body = el('div', { class: 'souv-card__body' });
+    body.appendChild(el('h3', { class: 'souv-card__name', text: s.name }));
+    const meta = el('div', { class: 'souv-card__meta' });
+    meta.appendChild(el('span', { class: 'souv-card__price', text: s.price }));
+    body.appendChild(meta);
+    body.appendChild(el('p', { class: 'souv-card__desc', text: s.description }));
+    const where = el('div', { class: 'souv-card__where' });
+    where.appendChild(el('span', { class: 'souv-card__where-icon', 'aria-hidden': 'true', text: '🏪' }));
+    const whereInfo = el('div', { class: 'souv-card__where-info' });
+    whereInfo.appendChild(el('div', { class: 'souv-card__where-shop', text: s.whereBuy }));
+    whereInfo.appendChild(el('div', { class: 'souv-card__where-desc', text: s.shops }));
+    where.appendChild(whereInfo);
+    body.appendChild(where);
+    const rating = el('div', { class: 'souv-card__rating' });
+    rating.appendChild(el('span', { class: 'souv-card__star', text: '★' }));
+    rating.appendChild(el('span', { text: `${s.rating.toFixed(1)} 順德街坊評` }));
+    body.appendChild(rating);
+    card.appendChild(body);
+    return card;
+  }
+
   function renderCard(p) {
     const card = el('article', { class: 'card' + (PLACES_DATA.featured.includes(p.id) ? ' card--featured' : ''), id: 'place-' + p.id });
     const media = el('div', { class: 'card__media' });
@@ -2511,40 +3050,30 @@ button:focus-visible { outline-offset: 1px; }
     media.appendChild(badges);
     card.appendChild(media);
 
+    // Title overlay on image (cleaner — name visible without scroll)
+    const titleOverlay = el('div', { class: 'card__title-overlay' });
+    const overlayName = el('h3', { class: 'card__name', text: p.name });
+    const overlaySub = el('div', { class: 'card__sub' });
+    overlaySub.appendChild(el('span', { class: 'card__sub-star', text: '★' }));
+    overlaySub.appendChild(el('span', { text: `${p.rating} · ${p.distanceFromHotel.toFixed(1)}km` }));
+    titleOverlay.appendChild(overlayName);
+    titleOverlay.appendChild(overlaySub);
+    media.appendChild(titleOverlay);
+
     const body = el('div', { class: 'card__body' });
-    body.appendChild(el('h3', { class: 'card__name', text: p.name }));
-    // Meta
+    // Compact meta — price + 點評 rating, nothing more
     const meta = el('div', { class: 'card__meta' });
-    meta.appendChild(el('span', { class: 'card__rating', html: `<span class="card__rating-star">★</span> ${p.rating} <span style="color:var(--ink-faint)">(${p.reviewCount.toLocaleString()})</span>` }));
     if (p.pricePerPerson > 0) {
       meta.appendChild(el('span', { class: 'card__price', text: `¥${p.pricePerPerson}/人` }));
-    } else {
+    } else if (p.pricePerPerson === 0) {
       meta.appendChild(el('span', { class: 'card__price', text: '免費' }));
     }
-    meta.appendChild(el('span', { class: 'card__distance', html: `📍 ${p.distanceFromHotel.toFixed(1)} km` }));
     if (p.dianping) {
-      const dp = el('a', {
-        class: 'card__dianping',
-        href: p.dianping,
-        target: '_blank',
-        rel: 'noopener noreferrer',
-        'aria-label': `大眾點評 ${p.name} · 開新頁`,
-        title: '大眾點評',
-        onclick: e => e.stopPropagation()
-      });
-      dp.appendChild(el('span', { class: 'card__dianping-icon', 'aria-hidden': 'true', text: '↗' }));
-      dp.appendChild(el('span', { text: '點評' }));
-      meta.appendChild(dp);
+      meta.appendChild(el('span', { class: 'card__rating', html: `<span class="card__rating-star">↗</span> 大眾 ${p.rating} <span style="color:var(--ink-faint)">(${p.reviewCount.toLocaleString()})</span>` }));
+    } else {
+      meta.appendChild(el('span', { class: 'card__rating', html: `<span class="card__rating-star">★</span> ${p.rating}` }));
     }
     body.appendChild(meta);
-    // Must try
-    if (p.mustTry && p.mustTry.length) {
-      const mt = el('div', { class: 'card__musttry' });
-      for (const m of p.mustTry.slice(0, 4)) {
-        mt.appendChild(el('span', { class: 'musttry-chip', text: m }));
-      }
-      body.appendChild(mt);
-    }
     body.appendChild(el('p', { class: 'card__desc', text: p.description }));
     // Footer — voters count line
     const voters = el('div', { class: 'card__voters' });
@@ -2574,11 +3103,43 @@ button:focus-visible { outline-offset: 1px; }
     body.appendChild(voteBtn);
     card.appendChild(body);
 
-    // Expand section
+    // Expand section — image gallery + 3 tabs
     const expand = el('div', { class: 'card__expand' });
-    expand.appendChild(el('div', { class: 'card__hours', html: `🕒 <span>${p.openHours}</span>` }));
-    expand.appendChild(el('div', { class: 'card__address', html: `📍 <span>${p.address}</span>` }));
-    // Comments
+    if (p.imageIds && p.imageIds.length > 1) {
+      const gallery = el('div', { class: 'card__gallery' });
+      p.imageIds.slice(0, 6).forEach((imgId, idx) => {
+        const img = el('img', {
+          class: 'card__gallery-img' + (idx === 0 ? ' is-active' : ''),
+          src: `https://images.unsplash.com/photo-${imgId}?w=200&q=70&auto=format&fit=crop`,
+          alt: `${p.name} ${idx + 1}`,
+          loading: 'lazy',
+          onclick: e => { e.stopPropagation(); openLightbox(p.imageIds, idx, p.name); }
+        });
+        gallery.appendChild(img);
+      });
+      if (p.imageIds.length > 6) {
+        gallery.appendChild(el('div', { class: 'card__gallery-count', text: `+${p.imageIds.length - 6}` }));
+      }
+      expand.appendChild(gallery);
+    }
+    const tabs = el('div', { class: 'card__tabs', role: 'tablist' });
+    const panes = {};
+    function makeTab(key, label) {
+      const btn = el('button', { class: 'card__tab' + (key === 'friends' ? ' is-active' : ''), type: 'button', role: 'tab', 'data-tab': key, text: label });
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        for (const t of tabs.children) t.classList.toggle('is-active', t.dataset.tab === key);
+        for (const k of Object.keys(panes)) panes[k].classList.toggle('is-active', k === key);
+      });
+      return btn;
+    }
+    tabs.appendChild(makeTab('friends', '朋友講'));
+    tabs.appendChild(makeTab('hours', '開放時間'));
+    tabs.appendChild(makeTab('dianping', '大眾點評'));
+    expand.appendChild(tabs);
+
+    // Pane: 朋友講 — comments + reactions
+    const friendsPane = el('div', { class: 'card__tab-pane is-active', 'data-pane': 'friends' });
     const commentList = el('div', { class: 'card__comments' });
     const comments = getComments(p.id);
     for (const c of comments) {
@@ -2593,7 +3154,8 @@ button:focus-visible { outline-offset: 1px; }
       cb.appendChild(el('div', { class: 'comment__text', text: c.text }));
       cmt.appendChild(cb);
       if (c.user === state.currentUser) {
-        const del = el('button', { class: 'comment__del', text: '✕', 'aria-label': '刪除留言', onclick: () => {
+        const del = el('button', { class: 'comment__del', text: '✕', 'aria-label': '刪除留言', onclick: e => {
+          e.stopPropagation();
           state.comments[p.id] = getComments(p.id).filter(x => !(x.user === c.user && x.ts === c.ts));
           saveState();
           render();
@@ -2602,14 +3164,52 @@ button:focus-visible { outline-offset: 1px; }
       }
       commentList.appendChild(cmt);
     }
-    expand.appendChild(commentList);
-    // Comment form
+    friendsPane.appendChild(commentList);
     const form = el('form', { class: 'comment-form', onsubmit: e => { e.preventDefault(); submitComment(p.id, input); }});
     const input = el('input', { type: 'text', placeholder: `用 ${state.currentUser} 個名留言...`, maxlength: 200 });
     const submit = el('button', { type: 'submit', text: '送出' });
     form.appendChild(input);
     form.appendChild(submit);
-    expand.appendChild(form);
+    friendsPane.appendChild(form);
+    panes.friends = friendsPane;
+    expand.appendChild(friendsPane);
+
+    // Pane: 開放時間
+    const hoursPane = el('div', { class: 'card__tab-pane', 'data-pane': 'hours' });
+    hoursPane.appendChild(el('div', { class: 'card__hours', html: `🕒 <span>${p.openHours}</span>` }));
+    hoursPane.appendChild(el('div', { class: 'card__address', html: `📍 <span>${p.address}</span>` }));
+    // Walking + taxi
+    const walkMin = Math.round((p.distanceFromHotel / 5) * 60);
+    const taxiEst = Math.max(10, Math.round(10 + p.distanceFromHotel * 2.5));
+    const transport = el('div', { class: 'card__transport' });
+    transport.appendChild(el('div', { html: `🚶 <span>步行 ~${walkMin} 分鐘</span>` }));
+    transport.appendChild(el('div', { html: `🚕 <span>的士 ~¥${taxiEst}</span>` }));
+    hoursPane.appendChild(transport);
+    panes.hours = hoursPane;
+    expand.appendChild(hoursPane);
+
+    // Pane: 大眾點評
+    const dpPane = el('div', { class: 'card__tab-pane', 'data-pane': 'dianping' });
+    if (p.dianping) {
+      const link = el('a', {
+        class: 'card__dianping-link',
+        href: p.dianping,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+        onclick: e => e.stopPropagation()
+      });
+      const main = el('div', { class: 'card__dianping-link-main' });
+      main.appendChild(el('div', { class: 'card__dianping-link-name', text: '大眾點評 · 睇更多評價' }));
+      main.appendChild(el('div', { class: 'card__dianping-link-meta', text: `${p.rating} ★ · ${p.reviewCount.toLocaleString()} 條評價` }));
+      link.appendChild(main);
+      link.appendChild(el('span', { class: 'card__dianping-link-arrow', text: '↗' }));
+      dpPane.appendChild(link);
+    } else {
+      dpPane.appendChild(el('div', { class: 'card__address', text: '呢間冇大眾點評頁' }));
+    }
+    panes.dianping = dpPane;
+    expand.appendChild(dpPane);
+
     card.appendChild(expand);
 
     // Expand toggle
