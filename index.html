@@ -1,0 +1,2487 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#C8362A">
+<title>佛山順德容桂 3 日遊 · 投票站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FFFFFF;
+  --surface: #F7F5F1;
+  --ink: #1A1612;
+  --ink-muted: #5C5448;
+  --ink-faint: #9C9080;
+  --line: #E8E2D6;
+  --brand: #C8362A;
+  --brand-dark: #8C2519;
+  --brand-soft: #FBE8E5;
+  --accent: #D4A437;
+  --cold: #2C5F7C;
+  --indoor: #4A7C2A;
+  --shadow-sm: 0 1px 2px rgba(26,22,18,0.04);
+  --shadow-md: 0 4px 8px rgba(26,22,18,0.06);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --z-sticky: 10;
+  --z-modal: 100;
+  --z-toast: 200;
+  --z-fab: 50;
+  --font-display: "Noto Serif TC", "Songti TC", "PingFang TC", serif;
+  --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+*::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+img { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; border: 0; background: transparent; padding: 0; color: inherit; }
+input, textarea { font-family: inherit; font-size: inherit; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); font-weight: 700; line-height: 1.25; }
+a { color: var(--brand-dark); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* ====== HIDDEN OVERRIDE ====== */
+[hidden] { display: none !important; }
+
+/* ====== LOGIN ====== */
+.login {
+  position: fixed; inset: 0;
+  display: grid; place-items: center;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,0.08), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(255,255,255,0.06), transparent 40%),
+    linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+  padding: 24px;
+  overflow: auto;
+}
+.login__bg {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80&auto=format&fit=crop');
+  background-size: cover; background-position: center;
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.login__card {
+  position: relative;
+  width: 100%; max-width: 420px;
+  background: var(--paper);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  padding: 40px 32px;
+}
+.login__logo {
+  font-size: 32px; line-height: 1; margin-bottom: 16px;
+}
+.login__title {
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.login__subtitle {
+  margin: 0 0 28px;
+  color: var(--ink-muted);
+  font-size: 14px;
+}
+.login__form { display: flex; flex-direction: column; gap: 16px; }
+.login__field { display: flex; flex-direction: column; gap: 6px; }
+.login__field > span {
+  font-size: 13px; font-weight: 500; color: var(--ink-muted);
+  letter-spacing: 0.02em;
+}
+.login__field input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 16px; /* prevents iOS zoom */
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+.login__field input:focus {
+  outline: 0;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+.login__field input::placeholder { color: var(--ink-faint); }
+.login__error {
+  margin: 4px 0 0;
+  min-height: 20px;
+  font-size: 13px;
+  color: var(--brand);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.login__error.is-visible { opacity: 1; }
+.login__help {
+  margin: 20px 0 0;
+  font-size: 12px;
+  color: var(--ink-faint);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ====== BUTTONS ====== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1;
+  border: 1px solid transparent;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease, transform 100ms ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active { transform: scale(0.98); }
+.btn--primary {
+  background: var(--brand); color: white; border-color: var(--brand);
+}
+.btn--primary:hover { background: var(--brand-dark); border-color: var(--brand-dark); }
+.btn--primary:disabled { background: var(--ink-faint); border-color: var(--ink-faint); cursor: not-allowed; }
+.btn--ghost {
+  background: transparent; color: var(--ink); border-color: var(--line);
+}
+.btn--ghost:hover { background: var(--surface); }
+.btn--block { width: 100%; }
+.btn--sm { padding: 8px 14px; font-size: 13px; }
+.btn--full { padding: 14px 20px; font-size: 16px; }
+.btn--danger { color: var(--brand); border-color: var(--brand); background: transparent; }
+.btn--danger:hover { background: var(--brand-soft); }
+
+/* ====== APP BAR ====== */
+.appbar {
+  position: sticky; top: 0;
+  z-index: var(--z-sticky);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+.appbar__left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.appbar__avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--brand-soft);
+  display: grid; place-items: center;
+  font-size: 20px;
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.appbar__name { font-weight: 700; font-size: 14px; line-height: 1.2; }
+.appbar__role {
+  font-size: 11px; color: var(--ink-muted);
+  display: flex; align-items: center; gap: 4px;
+  margin-top: 2px;
+}
+.role-chip {
+  display: inline-block;
+  font-size: 10px; font-weight: 500;
+  padding: 2px 6px;
+  background: var(--brand); color: white;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+.appbar__peers {
+  display: flex; gap: 4px; justify-content: center; align-items: center;
+  overflow-x: auto; scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.appbar__peers::-webkit-scrollbar { display: none; }
+.appbar__peer {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: grid; place-items: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+}
+.appbar__peer:hover { transform: translateY(-2px); }
+.appbar__peer--self {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+}
+.appbar__menu {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: var(--radius-sm);
+  font-size: 20px;
+  color: var(--ink-muted);
+  -webkit-tap-highlight-color: transparent;
+}
+.appbar__menu:hover { background: var(--surface); color: var(--ink); }
+
+/* ====== WELCOME BAND ====== */
+.welcome {
+  padding: 32px 20px 24px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+.welcome__greeting {
+  font-size: clamp(22px, 4vw, 28px);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.welcome__sub {
+  margin: 0 0 20px;
+  color: var(--ink-muted);
+  font-size: 14px;
+}
+.welcome__progress {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 12px;
+}
+.welcome__bar {
+  flex: 1;
+  height: 8px;
+  background: var(--surface);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.welcome__fill {
+  height: 100%;
+  background: var(--brand);
+  width: 0;
+  transition: width 400ms cubic-bezier(.34,1.2,.64,1);
+  border-radius: 999px;
+}
+.welcome__count {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.welcome__countdown {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.welcome__countdown-num {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--brand);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ====== TABS ====== */
+.tabs {
+  position: sticky; top: 61px;
+  z-index: var(--z-sticky);
+  display: flex;
+  gap: 0;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  padding: 0 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+  transition: color 150ms ease, border-color 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.tab:hover { color: var(--ink); }
+.tab.is-active {
+  color: var(--brand);
+  border-bottom-color: var(--brand);
+}
+.tab__count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  background: var(--surface);
+  color: var(--ink-muted);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.tab.is-active .tab__count { background: var(--brand-soft); color: var(--brand); }
+
+/* ====== FILTERS ====== */
+.filters {
+  padding: 16px 20px;
+  display: flex; gap: 8px; flex-wrap: wrap;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px;
+  font-size: 13px;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink-muted);
+  border: 1px solid var(--line);
+  transition: all 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.chip:hover { border-color: var(--ink-faint); color: var(--ink); }
+.chip.is-active {
+  background: var(--brand);
+  color: white;
+  border-color: var(--brand);
+}
+.chip__icon { font-size: 12px; }
+
+/* ====== GRID ====== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.grid--overview {
+  grid-template-columns: 1fr;
+  max-width: 800px;
+}
+@media (min-width: 720px) {
+  .grid--overview { grid-template-columns: 1fr 1fr; }
+}
+.empty {
+  grid-column: 1 / -1;
+  padding: 48px 24px;
+  text-align: center;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  color: var(--ink-muted);
+  background: var(--paper);
+}
+.empty__title { font-family: var(--font-display); font-size: 18px; color: var(--ink); margin-bottom: 8px; }
+.empty__action {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--brand);
+  font-weight: 500;
+  background: 0; border: 0; padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--brand);
+  cursor: pointer;
+}
+.empty__action:hover { background: var(--brand-soft); }
+
+/* ====== CARD ====== */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform 200ms cubic-bezier(.16,1,.3,1), border-color 200ms ease;
+  scroll-margin-top: 140px;
+}
+.card:hover { transform: translateY(-2px); border-color: var(--ink-faint); }
+.card--featured { grid-column: span 2; }
+.card--featured .card__media { aspect-ratio: 16/9; }
+@media (max-width: 720px) { .card--featured { grid-column: auto; } }
+.card__media {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: var(--surface);
+  overflow: hidden;
+}
+.card__img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 400ms ease;
+}
+.card:hover .card__img { transform: scale(1.04); }
+.card__img-fallback {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--brand-soft), var(--accent));
+  color: var(--brand-dark);
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  padding: 20px;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+.card__category {
+  position: absolute; top: 12px; left: 12px;
+  background: rgba(255,255,255,0.95);
+  color: var(--ink);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(4px);
+}
+.card__badges {
+  position: absolute; top: 12px; right: 12px;
+  display: flex; flex-direction: column; gap: 4px;
+  align-items: flex-end;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(4px);
+  line-height: 1;
+}
+.badge--cold { color: var(--cold); }
+.badge--indoor { color: var(--indoor); }
+.badge--michelin { background: var(--brand); color: white; }
+.card__body {
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  flex: 1;
+}
+.card__name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1.3;
+  margin: 0;
+}
+.card__meta {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.card__rating { display: inline-flex; align-items: center; gap: 3px; color: var(--ink); font-weight: 500; }
+.card__rating-star { color: var(--accent); }
+.card__price {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-muted);
+}
+.card__distance {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-muted);
+  display: inline-flex; align-items: center; gap: 3px;
+}
+.card__musttry {
+  display: flex; flex-wrap: wrap; gap: 4px;
+}
+.musttry-chip {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: var(--surface);
+  color: var(--ink-muted);
+  border-radius: 4px;
+  border: 1px solid var(--line);
+}
+.card__desc {
+  font-size: 13px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.card__footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  margin-top: auto;
+}
+.voters {
+  display: flex; align-items: center; gap: 6px;
+  min-height: 28px;
+}
+.voters__list {
+  display: flex; gap: -4px;
+}
+.voter-dot {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--paper);
+  display: grid; place-items: center;
+  font-size: 12px;
+  margin-left: -6px;
+}
+.voter-dot:first-child { margin-left: 0; }
+.voters__count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+  margin-left: 6px;
+}
+.btn-vote {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--brand);
+  border: 1px solid var(--brand);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-vote:hover { background: var(--brand-soft); }
+.btn-vote.is-voted {
+  background: var(--brand);
+  color: white;
+}
+.btn-vote__icon {
+  font-size: 14px;
+  display: inline-block;
+  transition: transform 200ms ease;
+}
+.btn-vote.is-popping .btn-vote__icon {
+  animation: pop 600ms cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.4) rotate(-8deg); }
+  70% { transform: scale(0.95) rotate(4deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+.btn-expand {
+  background: 0; border: 0; padding: 4px 8px;
+  font-size: 12px; color: var(--ink-muted);
+  border-radius: 6px;
+  margin-left: auto;
+}
+.btn-expand:hover { background: var(--surface); color: var(--ink); }
+.card__expand {
+  padding: 0 16px 16px;
+  display: none;
+  flex-direction: column; gap: 12px;
+  border-top: 1px dashed var(--line);
+  margin-top: 4px;
+  padding-top: 12px;
+}
+.card.is-expanded .card__expand { display: flex; }
+.card__hours {
+  font-size: 12px; color: var(--ink-muted);
+  display: flex; align-items: center; gap: 6px;
+}
+.card__address {
+  font-size: 12px; color: var(--ink-muted);
+  display: flex; align-items: flex-start; gap: 6px;
+}
+.card__comments { display: flex; flex-direction: column; gap: 8px; }
+.comment {
+  font-size: 13px;
+  padding: 8px 10px;
+  background: var(--surface);
+  border-radius: 6px;
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.comment__avatar {
+  font-size: 16px;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 1px;
+}
+.comment__body { flex: 1; min-width: 0; }
+.comment__head {
+  display: flex; align-items: baseline; gap: 6px; margin-bottom: 2px;
+}
+.comment__user { font-weight: 500; color: var(--ink); font-size: 12px; }
+.comment__time { color: var(--ink-faint); font-size: 11px; }
+.comment__text { color: var(--ink); line-height: 1.4; word-wrap: break-word; }
+.comment__del {
+  font-size: 12px; color: var(--ink-faint);
+  background: 0; border: 0; padding: 0 0 0 4px;
+  cursor: pointer;
+  align-self: center;
+}
+.comment__del:hover { color: var(--brand); }
+.comment-form {
+  display: flex; gap: 6px; align-items: flex-end;
+}
+.comment-form input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 13px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.comment-form input:focus {
+  outline: 0; border-color: var(--brand);
+  box-shadow: 0 0 0 2px var(--brand-soft);
+}
+.comment-form button {
+  padding: 8px 14px;
+  background: var(--brand); color: white;
+  border: 0; border-radius: 6px;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer;
+}
+.comment-form button:disabled {
+  background: var(--ink-faint); cursor: not-allowed;
+}
+
+/* ====== OVERVIEW (organizer) ====== */
+.ov-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.ov-card__title {
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+}
+.ov-card__title small {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+.ov-card__voters {
+  display: flex; flex-wrap: wrap; gap: 4px;
+}
+.ov-voter {
+  font-size: 11px;
+  padding: 3px 8px;
+  background: var(--brand-soft);
+  color: var(--brand-dark);
+  border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 3px;
+}
+.ov-user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.ov-user {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  text-align: center;
+  display: flex; flex-direction: column; gap: 4px; align-items: center;
+}
+.ov-user__avatar { font-size: 28px; }
+.ov-user__name { font-weight: 500; font-size: 13px; }
+.ov-user__stat { font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+
+/* ====== FAB ====== */
+.fab {
+  position: fixed; right: 20px; bottom: 20px;
+  z-index: var(--z-fab);
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--brand); color: white;
+  display: grid; place-items: center;
+  font-size: 24px;
+  box-shadow: 0 4px 12px rgba(200,54,42,0.32);
+  border: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.fab:hover { background: var(--brand-dark); transform: scale(1.05); }
+.fab:active { transform: scale(0.95); }
+
+/* ====== DRAWER ====== */
+.drawer-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(26,22,18,0.4);
+  z-index: var(--z-modal);
+  opacity: 0; pointer-events: none;
+  transition: opacity 200ms ease;
+}
+.drawer-backdrop.is-open { opacity: 1; pointer-events: auto; }
+.drawer {
+  position: fixed; right: 0; top: 0; bottom: 0;
+  width: 280px;
+  background: var(--paper);
+  z-index: calc(var(--z-modal) + 1);
+  transform: translateX(100%);
+  transition: transform 250ms cubic-bezier(.16,1,.3,1);
+  display: flex; flex-direction: column;
+  padding: 20px 0;
+}
+.drawer.is-open { transform: translateX(0); }
+.drawer__head {
+  padding: 0 20px 16px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 8px;
+}
+.drawer__title { font-family: var(--font-display); font-size: 18px; font-weight: 700; }
+.drawer__list { list-style: 0; padding: 0; margin: 0; }
+.drawer__item {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 14px;
+  text-align: left;
+  background: 0; border: 0;
+  cursor: pointer;
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+}
+.drawer__item:hover { background: var(--surface); }
+.drawer__item-icon { font-size: 18px; }
+
+/* ====== MODAL (native dialog) ====== */
+dialog {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  max-width: 400px;
+  width: calc(100% - 32px);
+  box-shadow: 0 16px 48px rgba(26,22,18,0.16);
+}
+dialog::backdrop { background: rgba(26,22,18,0.4); }
+.modal__head { padding: 20px 20px 8px; }
+.modal__title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+.modal__body { padding: 0 20px 16px; color: var(--ink-muted); font-size: 14px; line-height: 1.5; }
+.modal__textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-family: inherit; font-size: 14px;
+  resize: vertical;
+}
+.modal__textarea:focus {
+  outline: 0; border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+.modal__actions {
+  padding: 12px 20px 20px;
+  display: flex; gap: 8px; justify-content: flex-end;
+}
+.modal__actions button { padding: 10px 18px; font-size: 14px; border-radius: var(--radius-sm); cursor: pointer; }
+.modal__cancel {
+  background: transparent;
+  color: var(--ink-muted);
+  border: 1px solid var(--line);
+}
+.modal__cancel:hover { background: var(--surface); }
+.modal__ok {
+  background: var(--brand); color: white; border: 1px solid var(--brand);
+  font-weight: 500;
+}
+.modal__ok:hover { background: var(--brand-dark); }
+.modal__ok--danger { background: var(--brand); }
+
+/* ====== TOAST ====== */
+#toast-root {
+  position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+  z-index: var(--z-toast);
+  display: flex; flex-direction: column; gap: 8px;
+  align-items: center;
+  pointer-events: none;
+}
+.toast {
+  background: var(--ink); color: white;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.toast.is-visible { opacity: 1; transform: translateY(0); }
+.toast--success { background: var(--indoor); }
+.toast--error { background: var(--brand); }
+
+/* ====== REDUCED MOTION ====== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ====== ACCESSIBILITY ====== */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+button:focus-visible { outline-offset: 1px; }
+</style>
+</head>
+<body>
+
+<!-- ====== LOGIN SCREEN ====== -->
+<section id="login" class="login" aria-labelledby="login-title">
+  <div class="login__bg" aria-hidden="true"></div>
+  <div class="login__card">
+    <div class="login__logo" aria-hidden="true">🏮</div>
+    <h1 id="login-title" class="login__title">佛山順德容桂 3 日遊</h1>
+    <p class="login__subtitle">投票站 · 6/30 - 7/2</p>
+    <form class="login__form" id="login-form" autocomplete="off" novalidate>
+      <label class="login__field">
+        <span>Access Code(英文名)</span>
+        <input type="text" id="login-name" placeholder="打你個英文名" autocomplete="off" autocapitalize="off" autocorrect="off" required>
+      </label>
+      <button type="submit" class="btn btn--primary btn--block btn--full" id="login-submit">開始投票 →</button>
+      <p class="login__error" id="login-error" role="alert" aria-live="polite"></p>
+    </form>
+    <p class="login__help">問主揪 Match 攞你個英文名就入到</p>
+  </div>
+</section>
+
+<!-- ====== APP ====== -->
+<div id="app" hidden>
+  <header class="appbar" role="banner">
+    <div class="appbar__left">
+      <div class="appbar__avatar" id="appbar-avatar" aria-hidden="true"></div>
+      <div>
+        <div class="appbar__name" id="appbar-name"></div>
+        <div class="appbar__role" id="appbar-role"></div>
+      </div>
+    </div>
+    <div class="appbar__peers" id="appbar-peers" aria-label="同行者"></div>
+    <button class="appbar__menu" id="appbar-menu" aria-label="開啟選單">⋯</button>
+  </header>
+
+  <div class="welcome">
+    <h2 class="welcome__greeting" id="welcome-greeting"></h2>
+    <p class="welcome__sub" id="welcome-sub"></p>
+    <div class="welcome__progress">
+      <div class="welcome__bar" role="progressbar" aria-label="投票進度">
+        <div class="welcome__fill" id="welcome-fill"></div>
+      </div>
+      <div class="welcome__count" id="welcome-count"></div>
+    </div>
+    <div class="welcome__countdown" id="welcome-countdown"></div>
+  </div>
+
+  <nav class="tabs" id="tabs" role="tablist" aria-label="分類"></nav>
+
+  <div class="filters" id="filters" role="toolbar" aria-label="篩選"></div>
+
+  <main class="grid" id="grid" role="main"></main>
+</div>
+
+<!-- ====== DRAWER (FAB menu) ====== -->
+<div class="drawer-backdrop" id="drawer-backdrop" aria-hidden="true"></div>
+<aside class="drawer" id="drawer" aria-label="選單" aria-hidden="true">
+  <div class="drawer__head">
+    <div class="drawer__title">選單</div>
+  </div>
+  <ul class="drawer__list">
+    <li><button class="drawer__item" data-action="export"><span class="drawer__item-icon">📤</span> 匯出 JSON</button></li>
+    <li><button class="drawer__item" data-action="import"><span class="drawer__item-icon">📥</span> 匯入 JSON</button></li>
+    <li><button class="drawer__item" data-action="switch"><span class="drawer__item-icon">🔄</span> 切換用戶</button></li>
+    <li><button class="drawer__item" data-action="about"><span class="drawer__item-icon">ℹ️</span> 關於本站</button></li>
+  </ul>
+</aside>
+
+<!-- ====== MODALS ====== -->
+<dialog id="confirm-modal" aria-labelledby="confirm-title">
+  <div class="modal__head">
+    <h3 class="modal__title" id="confirm-title"></h3>
+  </div>
+  <div class="modal__body" id="confirm-body"></div>
+  <div class="modal__actions">
+    <button class="modal__cancel" id="confirm-cancel">取消</button>
+    <button class="modal__ok" id="confirm-ok">確定</button>
+  </div>
+</dialog>
+
+<dialog id="import-modal" aria-labelledby="import-title">
+  <div class="modal__head">
+    <h3 class="modal__title" id="import-title">匯入 JSON</h3>
+  </div>
+  <div class="modal__body">
+    <p style="margin-top:0;">貼朋友嘅匯出內容,或者揀檔案:</p>
+    <textarea class="modal__textarea" id="import-text" placeholder='{"schemaVersion":2,...}'></textarea>
+    <div style="margin-top:10px;">
+      <input type="file" id="import-file" accept=".json,application/json" style="font-size:13px;">
+    </div>
+  </div>
+  <div class="modal__actions">
+    <button class="modal__cancel" id="import-cancel">取消</button>
+    <button class="modal__ok" id="import-ok">匯入去合併</button>
+  </div>
+</dialog>
+
+<dialog id="about-modal" aria-labelledby="about-title">
+  <div class="modal__head">
+    <h3 class="modal__title" id="about-title">關於本站</h3>
+  </div>
+  <div class="modal__body" style="font-size:13px;">
+    <p>佛山順德容桂 3 日遊 · 投票站</p>
+    <p>6/30 - 7/2 · 同 6 個朋友</p>
+    <p style="color:var(--ink-faint);font-size:12px;">資料存喺你個瀏覽器 localStorage,離線都用得。每個裝置獨立投票,記得匯出 JSON 畀主揪合併。</p>
+  </div>
+  <div class="modal__actions">
+    <button class="modal__ok" id="about-close">關閉</button>
+  </div>
+</dialog>
+
+<!-- ====== TOAST ====== -->
+<div id="toast-root" aria-live="polite" aria-atomic="true"></div>
+
+<!-- ====== DATA ====== -->
+<script type="application/json" id="users-data">
+{
+  "version": 1,
+  "tripName": "佛山順德容桂 3 日遊",
+  "tripDates": "2026-06-30 至 2026-07-02",
+  "tripStartTs": 1782844800000,
+  "tripEndTs": 1783104000000,
+  "organizer": "Match",
+  "users": [
+    {"name": "Match", "role": "organizer", "avatar": "🧲"},
+    {"name": "Carrie", "avatar": "🍆"},
+    {"name": "Illich", "avatar": "🦉"},
+    {"name": "Red", "avatar": "🌶"},
+    {"name": "Tracy", "avatar": "🐬"},
+    {"name": "Ann", "avatar": "🐝"},
+    {"name": "Kenneth", "avatar": "🐺"},
+    {"name": "Lanche", "avatar": "🐱"},
+    {"name": "Jules", "avatar": "🦄"}
+  ]
+}
+</script>
+
+<script type="application/json" id="places-data">
+{
+  "version": 1,
+  "featured": [
+    "zhuroupo",
+    "huanle"
+  ],
+  "places": [
+    {
+      "id": "zhuroupo",
+      "name": "豬肉婆私房菜",
+      "category": "restaurant",
+      "subcategory": "順德菜 · 私房菜",
+      "rating": 4.6,
+      "reviewCount": 2840,
+      "pricePerPerson": 150,
+      "mustTry": [
+        "魚餅",
+        "炸腸頭",
+        "布包豆腐",
+        "炒蟹"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 0.3,
+      "address": "順德區容桂街道東堤路16號",
+      "openHours": "11:00–14:00, 17:00–21:30",
+      "michelin": true,
+      "imageIds": [
+        "1414235077428-338989a2e8c0",
+        "1552566626-52f8b828add9"
+      ],
+      "description": "容桂老字號,招牌魚餅脆卜卜,炸腸頭好香,布包豆腐入口即化,順德家鄉味。"
+    },
+    {
+      "id": "meiweiju",
+      "name": "美未居 · 老字號",
+      "category": "restaurant",
+      "subcategory": "順德菜 · 桑拿雞",
+      "rating": 4.4,
+      "reviewCount": 1850,
+      "pricePerPerson": 107,
+      "mustTry": [
+        "桑拿雞",
+        "順德魚生",
+        "鮮鮑魚椰子雞"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 1.2,
+      "address": "順德區容桂街道容里居委會東103米",
+      "openHours": "11:00–14:30, 17:00–21:00",
+      "michelin": true,
+      "imageIds": [
+        "1517248135467-4c7edcad34c4",
+        "1547573854-74d2a71d0826"
+      ],
+      "description": "大眾點評順德菜熱門榜第 5 名,必食榜常客,招牌桑拿雞即蒸,雞皮爽脆。"
+    },
+    {
+      "id": "fengcheng",
+      "name": "鳳城酒家",
+      "category": "restaurant",
+      "subcategory": "粵菜 · 老字號",
+      "rating": 4.5,
+      "reviewCount": 3120,
+      "pricePerPerson": 130,
+      "mustTry": [
+        "欖菜肉鬆陳村粉",
+        "拆魚羹",
+        "燒鵝"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 4.5,
+      "address": "順德區大良街道華蓋路83號",
+      "openHours": "07:00–22:00",
+      "michelin": true,
+      "imageIds": [
+        "1559339352-11d035aa65de",
+        "1525755662778-989d0524087e"
+      ],
+      "description": "佛山老字號茶樓,大眾點評必食榜,點心造型精美,飲茶老廣風。"
+    },
+    {
+      "id": "rongbian",
+      "name": "容邊排骨飯",
+      "category": "restaurant",
+      "subcategory": "順德早餐 · 蒸飯",
+      "rating": 4.3,
+      "reviewCount": 980,
+      "pricePerPerson": 36,
+      "mustTry": [
+        "蒸排骨飯",
+        "啫塘虱",
+        "枸杞葉豬紅湯"
+      ],
+      "hasAirCon": false,
+      "indoor": "indoor",
+      "distanceFromHotel": 2.0,
+      "address": "順德區新容東路容桂容邊小學旁",
+      "openHours": "04:30–13:30",
+      "michelin": false,
+      "imageIds": [
+        "1546069901-ba9599a7e63c",
+        "1504674900247-0877df9cc836"
+      ],
+      "description": "日賣千碟嘅容邊排骨飯,順德傳統蒸飯,排骨入味,米飯索晒啲醬。啫塘虱、枸杞葉豬紅湯都係必點。"
+    },
+    {
+      "id": "tangfeng",
+      "name": "糖楓甜品",
+      "category": "restaurant",
+      "subcategory": "糖水 · 甜品",
+      "rating": 4.7,
+      "reviewCount": 460,
+      "pricePerPerson": 30,
+      "mustTry": [
+        "抹茶布丁",
+        "抹茶牛奶麻薯"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 1.5,
+      "address": "順德區容桂居民區",
+      "openHours": "13:00–23:00",
+      "michelin": false,
+      "imageIds": [
+        "1505740420928-5e560c06d30e",
+        "1473093295043-cdd812d0e601"
+      ],
+      "description": "容桂隱藏甜品店,抹茶控必去,抹茶布丁 QQ 彈彈入口即化,裝修靚打卡一流。"
+    },
+    {
+      "id": "minxin",
+      "name": "民信老鋪",
+      "category": "restaurant",
+      "subcategory": "糖水 · 雙皮奶",
+      "rating": 4.4,
+      "reviewCount": 5200,
+      "pricePerPerson": 28,
+      "mustTry": [
+        "雙皮奶",
+        "薑撞奶",
+        "鳳凰奶糊"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 4.8,
+      "address": "順德區大良街道華蓋路93號",
+      "openHours": "10:00–22:30",
+      "michelin": false,
+      "imageIds": [
+        "1565299624946-b28f40a0ae38",
+        "1565958011703-44f9829ba187"
+      ],
+      "description": "順德雙皮奶始祖老鋪,百年老字號,奶香濃郁,大良總店最正宗。"
+    },
+    {
+      "id": "xunwei",
+      "name": "巡味順德菜",
+      "category": "restaurant",
+      "subcategory": "順德菜 · 海景",
+      "rating": 4.3,
+      "reviewCount": 720,
+      "pricePerPerson": 120,
+      "mustTry": [
+        "順德魚生",
+        "海鮮蒸鍋"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 5.5,
+      "address": "順德區歡樂海岸購物中心1樓",
+      "openHours": "11:00–22:00",
+      "michelin": false,
+      "imageIds": [
+        "1551782450-a2132b4ba21d",
+        "1574484284002-952d92456975"
+      ],
+      "description": "歡樂海岸內餐廳,順德魚生配海邊夜景,適合一邊食一邊睇摩天輪。"
+    },
+    {
+      "id": "wanxianghui",
+      "name": "順德萬象匯",
+      "category": "attraction",
+      "subcategory": "商場 · 美食廣場",
+      "rating": 4.7,
+      "reviewCount": 5200,
+      "pricePerPerson": 0,
+      "mustTry": [
+        "340+ 品牌",
+        "50% 順德首店",
+        "冷氣超強"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 6.0,
+      "address": "順德區大良街道駒榮北路地鐵3號線上蓋",
+      "openHours": "10:00–22:00",
+      "michelin": false,
+      "imageIds": [
+        "1606755962773-d324e0a13086",
+        "1565299507177-b0ac66763828"
+      ],
+      "description": "2025 年 4 月新開,華潤置地灣西首個重資產項目,340+ 個品牌,超過 50% 順德首店,冷氣全開。"
+    },
+    {
+      "id": "huanle",
+      "name": "順德歡樂海岸 PLUS",
+      "category": "attraction",
+      "subcategory": "主題樂園 · 夜景",
+      "rating": 4.6,
+      "reviewCount": 12800,
+      "pricePerPerson": 0,
+      "mustTry": [
+        "摩天輪",
+        "水舞秀",
+        "夜景打卡",
+        "瑪雅海灘水公園"
+      ],
+      "hasAirCon": false,
+      "indoor": "mixed",
+      "distanceFromHotel": 5.0,
+      "address": "順德區大良街道南國東路",
+      "openHours": "10:00–22:00",
+      "michelin": false,
+      "imageIds": [
+        "1496116218417-1a781b1c416c",
+        "1556909114-f6e7ad7d3136"
+      ],
+      "description": "免費入場,玩樂自選,夜景超靚水舞秀配摩天輪,夜晚影相最正。"
+    },
+    {
+      "id": "bingxue",
+      "name": "順德樂漫冰雪王國",
+      "category": "attraction",
+      "subcategory": "室內冰雪",
+      "rating": 4.2,
+      "reviewCount": 850,
+      "pricePerPerson": 98,
+      "mustTry": [
+        "零下 10 度",
+        "冰雕展",
+        "雪圈滑道"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 7.0,
+      "address": "順德區大良街道",
+      "openHours": "10:00–21:00",
+      "michelin": false,
+      "imageIds": [
+        "1567620905732-2d1ec7ab7445",
+        "1576618148400-f54bed99fcfd"
+      ],
+      "description": "室內冰雪樂園,恆溫零下 10 度,大熱天消暑親子首選。"
+    },
+    {
+      "id": "haifang",
+      "name": "順德海立方海洋館",
+      "category": "attraction",
+      "subcategory": "室內海洋館",
+      "rating": 4.4,
+      "reviewCount": 1200,
+      "pricePerPerson": 80,
+      "mustTry": [
+        "海底隧道",
+        "水母館",
+        "觸摸池"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 6.5,
+      "address": "順德區大良街道",
+      "openHours": "09:30–18:00",
+      "michelin": false,
+      "imageIds": [
+        "1551504734-5ee1c4a1479b",
+        "1568901346375-23c9450c58cd"
+      ],
+      "description": "室內海洋館冷氣全開,海底隧道水母館影相一流,落雨都唔怕嘅室內景點。"
+    },
+    {
+      "id": "yurenmatou",
+      "name": "漁人碼頭",
+      "category": "attraction",
+      "subcategory": "江景日落",
+      "rating": 4.5,
+      "reviewCount": 980,
+      "pricePerPerson": 0,
+      "mustTry": [
+        "江景日落",
+        "碼頭打卡",
+        "文創小店"
+      ],
+      "hasAirCon": false,
+      "indoor": "outdoor",
+      "distanceFromHotel": 0.1,
+      "address": "順德區容桂街道東堤路",
+      "openHours": "全天",
+      "michelin": false,
+      "imageIds": [
+        "1604908176997-125f25cc6f3d",
+        "1546069901-d5bfd2cbfb1f"
+      ],
+      "description": "就喺酒店隔離,傍晚散步睇日落最 chill,文創小店影相打卡,晚間涼爽。"
+    },
+    {
+      "id": "huoli",
+      "name": "活力無限 KTV",
+      "category": "nightlife",
+      "subcategory": "KTV · 卡拉 OK",
+      "rating": 4.3,
+      "reviewCount": 620,
+      "pricePerPerson": 80,
+      "mustTry": [
+        "包廂歡唱",
+        "中央空調",
+        "歌庫齊全"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 1.8,
+      "address": "順德區容桂桂洲大道中63號天佑城3樓3E01舖",
+      "openHours": "12:00–02:00",
+      "michelin": false,
+      "imageIds": [
+        "1534422298391-e4f8c172dddb",
+        "1561758033-d89a9ad46330"
+      ],
+      "description": "容桂天佑城內,中央冷氣,中大型包廂齊全,深夜唱 K 必去。"
+    },
+    {
+      "id": "panda",
+      "name": "熊貓酒吧 · Super Panda",
+      "category": "nightlife",
+      "subcategory": "夜店 · 酒吧",
+      "rating": 4.2,
+      "reviewCount": 380,
+      "pricePerPerson": 200,
+      "mustTry": [
+        "特色調酒",
+        "DJ 表演",
+        "舞池"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 2.5,
+      "address": "順德區容桂柴油機1959工業路6棟",
+      "openHours": "20:00–02:00",
+      "michelin": false,
+      "imageIds": [
+        "1553621042-f6e147245754",
+        "1569718212165-3a8278d5f624"
+      ],
+      "description": "容桂工業風酒吧,特色調酒 + DJ 表演,週末氣氛一流。"
+    },
+    {
+      "id": "chill",
+      "name": "Chill Club",
+      "category": "nightlife",
+      "subcategory": "酒吧 · 輕鬆",
+      "rating": 4.4,
+      "reviewCount": 290,
+      "pricePerPerson": 150,
+      "mustTry": [
+        "手工調酒",
+        "沙發區",
+        "Chill 音樂"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 1.2,
+      "address": "順德區容桂外環路10號東逸灣逸濤苑111號舖",
+      "openHours": "19:00–01:00",
+      "michelin": false,
+      "imageIds": [
+        "1583394293214-28ded15ee548",
+        "1582450871972-ab5ca641643d"
+      ],
+      "description": "容桂外環路 chill 酒吧,手工調酒 + 沙發區,氣氛放鬆,適合飯後小酌。"
+    },
+    {
+      "id": "baidazhoushen",
+      "name": "百搭粥神",
+      "category": "restaurant",
+      "subcategory": "順德粥品 · 早餐",
+      "rating": 4.5,
+      "reviewCount": 1100,
+      "pricePerPerson": 25,
+      "mustTry": [
+        "生滾粥",
+        "過江腸",
+        "生魚片",
+        "生腸",
+        "板筋",
+        "肉丸"
+      ],
+      "hasAirCon": false,
+      "indoor": "indoor",
+      "distanceFromHotel": 5.2,
+      "address": "順德大良街道北區社區連新路 20 街 1 號",
+      "openHours": "05:00–11:00",
+      "michelin": false,
+      "imageIds": [
+        "1572715376701-98568319fd0b"
+      ],
+      "description": "順德早餐粥品名店,生滾粥 $10 起,過江腸、生魚片、生腸都係招牌。"
+    },
+    {
+      "id": "zhoufunin",
+      "name": "粥福您(女粥神)",
+      "category": "restaurant",
+      "subcategory": "順德粥品 · 早餐",
+      "rating": 4.4,
+      "reviewCount": 850,
+      "pricePerPerson": 22,
+      "mustTry": [
+        "生滾粥",
+        "炒米粉",
+        "腸粉"
+      ],
+      "hasAirCon": false,
+      "indoor": "indoor",
+      "distanceFromHotel": 5.5,
+      "address": "佛山市順德區安阜大街福盈酒店西北側約 100 米",
+      "openHours": "06:00–11:00",
+      "michelin": false,
+      "imageIds": [
+        "1497515114629-f71d768fd07c"
+      ],
+      "description": "女粥神主理,生滾粥、炒米粉、腸粉 $10 餘起,街坊早餐之選。"
+    },
+    {
+      "id": "shaozhubiao",
+      "name": "燒豬標私房菜",
+      "category": "restaurant",
+      "subcategory": "均安蒸豬 · 大食會",
+      "rating": 4.7,
+      "reviewCount": 1450,
+      "pricePerPerson": 180,
+      "mustTry": [
+        "均安蒸豬",
+        "均安燒豬",
+        "順德四大名菜"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 18.0,
+      "address": "順德區均安鎮南浦村市場大街 13 號",
+      "openHours": "11:00–14:00, 17:00–21:00",
+      "michelin": true,
+      "imageIds": [
+        "1518306727298-4c17e1bf6942"
+      ],
+      "description": "均安蒸豬始祖,招牌均安蒸豬 + 三重火半焗半炸燒豬,大食會必去。"
+    },
+    {
+      "id": "baizhangyuan",
+      "name": "百丈園",
+      "category": "restaurant",
+      "subcategory": "河鮮私房菜 · 隱世",
+      "rating": 4.6,
+      "reviewCount": 620,
+      "pricePerPerson": 250,
+      "mustTry": [
+        "河三鮮魚球魚卜湯",
+        "蒜頭豆豉蒸爽鱔",
+        "時蔬炒水蛇柳",
+        "糯米飯焗大羅氏蝦"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 12.0,
+      "address": "順德勒流(要熟路先搵到)",
+      "openHours": "11:00–14:00, 17:00–21:00",
+      "michelin": false,
+      "imageIds": [
+        "1559329007-40df8a9345d8"
+      ],
+      "description": "勒流隱世河鮮私房菜,招牌河三鮮魚球魚卜湯、蒜頭豆豉蒸爽鱔,識食老饕嘅私藏。"
+    },
+    {
+      "id": "feichanghao",
+      "name": "飛嘗蚝",
+      "category": "restaurant",
+      "subcategory": "台山生蠔 · 打邊爐",
+      "rating": 4.5,
+      "reviewCount": 780,
+      "pricePerPerson": 220,
+      "mustTry": [
+        "鮮活台山生蠔",
+        "雞子鵪鶉蛋撈生蠔",
+        "瓦窯雞"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 2.8,
+      "address": "順德容桂海尾合新路 9 號",
+      "openHours": "17:00–02:00",
+      "michelin": false,
+      "imageIds": [
+        "1551183053-bf91a1d81141"
+      ],
+      "description": "台山生蠔專門店,鮮活直送,招牌雞子鵪鶉蛋撈生蠔、瓦窯雞,宵夜首選。"
+    },
+    {
+      "id": "yihuchayi",
+      "name": "一壺茶藝館",
+      "category": "restaurant",
+      "subcategory": "順德點心 · 飲茶",
+      "rating": 4.6,
+      "reviewCount": 1620,
+      "pricePerPerson": 95,
+      "mustTry": [
+        "蜂巢芋角",
+        "龍蝦餃",
+        "叉燒酥",
+        "煎鹹肉粽",
+        "麻糬包"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 1.5,
+      "address": "佛山市順德區容桂街道德勝社區江南大道 59 號 F 區首層",
+      "openHours": "07:30–22:00",
+      "michelin": false,
+      "imageIds": [
+        "1556909114-f6e7ad7d3136"
+      ],
+      "description": "容桂手工點心,蜂巢芋角、龍蝦餃、叉燒酥、煎鹹肉粽、麻糬包都係順德名物嘅手工版。"
+    },
+    {
+      "id": "niurougong",
+      "name": "牛肉公飯店",
+      "category": "restaurant",
+      "subcategory": "清水牛內臟火鍋",
+      "rating": 4.5,
+      "reviewCount": 940,
+      "pricePerPerson": 160,
+      "mustTry": [
+        "牛內臟火鍋(15 款)",
+        "牛脷坑",
+        "牛生腸",
+        "自家製牛肉丸"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 7.5,
+      "address": "順德區佛山漕漁新村公園東一街與背江大街交叉口",
+      "openHours": "11:00–14:00, 17:00–22:00",
+      "michelin": false,
+      "imageIds": [
+        "1565299624946-b28f40a0ae38"
+      ],
+      "description": "清水牛內臟火鍋專門店,15 款牛部位清水淥,牛脷坑、牛生腸、自家製牛肉丸必試。"
+    },
+    {
+      "id": "runjixiaoye",
+      "name": "潤記宵夜",
+      "category": "restaurant",
+      "subcategory": "大良宵夜",
+      "rating": 4.6,
+      "reviewCount": 1280,
+      "pricePerPerson": 110,
+      "mustTry": [
+        "炸雞翼(麒麟皮)",
+        "炒田螺",
+        "卜卜蜆",
+        "椒鹽骨"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 5.0,
+      "address": "順德區環城路 13 號",
+      "openHours": "18:00–02:00",
+      "michelin": false,
+      "imageIds": [
+        "1559339352-11d035aa65de"
+      ],
+      "description": "大良宵夜名店,招牌炸雞翼外脆內爆汁(麒麟皮),炒田螺、卜卜蜆、椒鹽骨都一流。"
+    },
+    {
+      "id": "yexianyusheng",
+      "name": "野仙魚生·百年嶺南老宅",
+      "category": "restaurant",
+      "subcategory": "順德魚生 · 私房菜",
+      "rating": 4.7,
+      "reviewCount": 2100,
+      "pricePerPerson": 280,
+      "mustTry": [
+        "順德魚生",
+        "嶺南老宅私房菜"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 6.0,
+      "address": "順德區(百年嶺南老宅內)",
+      "openHours": "11:00–14:00, 17:00–21:00",
+      "michelin": true,
+      "imageIds": [
+        "1546069901-ba9599a7e63c"
+      ],
+      "description": "百年嶺南老宅入面嘅順德魚生專門店,環境一流,魚生 + 私房菜體驗。"
+    },
+    {
+      "id": "yiheyuan",
+      "name": "溢和苑私房菜(錦岩店)",
+      "category": "restaurant",
+      "subcategory": "順德私房菜",
+      "rating": 4.6,
+      "reviewCount": 1380,
+      "pricePerPerson": 200,
+      "mustTry": [
+        "順德私房菜",
+        "錦岩風味"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 6.5,
+      "address": "順德區錦岩路(錦岩店)",
+      "openHours": "11:00–14:00, 17:00–21:00",
+      "michelin": false,
+      "imageIds": [
+        "1552566626-52f8b828add9"
+      ],
+      "description": "溢和苑錦岩店,順德私房菜,地道風味,適合圍桌大食會。"
+    },
+    {
+      "id": "shuxinwan",
+      "name": "舒心灣會所 · K歌沐足(容桂店)",
+      "category": "wellness",
+      "subcategory": "足浴 · 按摩 · K歌",
+      "rating": 4.5,
+      "reviewCount": 320,
+      "pricePerPerson": 176,
+      "mustTry": [
+        "沐足",
+        "按摩",
+        "棋牌",
+        "K歌包廂"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 1.8,
+      "address": "順德區容桂街道華基路 18 號",
+      "openHours": "12:00–02:00",
+      "michelin": false,
+      "imageIds": [
+        "1571019613454-1cb2f99b2d8b"
+      ],
+      "description": "容桂 K 歌沐足會所,集沐足、按摩、棋牌、KTV 包廂於一身,行完街食完嘢去鬆一鬆一流。"
+    },
+    {
+      "id": "hexianggong",
+      "name": "鶴祥宮 · 影院足道 · SPA(容桂店)",
+      "category": "wellness",
+      "subcategory": "足道 · SPA · 連鎖",
+      "rating": 4.4,
+      "reviewCount": 580,
+      "pricePerPerson": 158,
+      "mustTry": [
+        "影院足道",
+        "全身 SPA",
+        "獨立房間"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 1.5,
+      "address": "順德區容桂(連鎖分店)",
+      "openHours": "11:00–02:00",
+      "michelin": false,
+      "imageIds": [
+        "1559599101-f09722fb4948"
+      ],
+      "description": "連鎖品牌,招牌影院足道,房入面有投影睇戲,足浴加按摩同步,環境乾淨企理。"
+    },
+    {
+      "id": "shilitaohua",
+      "name": "十里桃花 · K歌沐足(黃金廣場店)",
+      "category": "wellness",
+      "subcategory": "沐足 · 養生 SPA",
+      "rating": 4.8,
+      "reviewCount": 1450,
+      "pricePerPerson": 168,
+      "mustTry": [
+        "60 分鐘按摩套餐",
+        "精油按摩",
+        "獨立房"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 5.5,
+      "address": "順德區大良黃金廣場",
+      "openHours": "11:00–02:00",
+      "michelin": false,
+      "imageIds": [
+        "1591343395082-e120087004b4"
+      ],
+      "description": "Trip.com 推薦嘅順德高質按摩店,6 間房任揀,泰式 + 精油按摩,房闊有投影,師傅手勢純正唔會推銷。"
+    },
+    {
+      "id": "mumuhotspring",
+      "name": "沐沐湯泉",
+      "category": "wellness",
+      "subcategory": "湯泉 · 桑拿 · 24h",
+      "rating": 4.7,
+      "reviewCount": 2100,
+      "pricePerPerson": 250,
+      "mustTry": [
+        "恆溫湯池",
+        "主題汗蒸",
+        "自助餐",
+        "足道養生",
+        "SPA 護理"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 8.0,
+      "address": "順德區(7000㎡ 藝術空間)",
+      "openHours": "24 小時",
+      "michelin": false,
+      "imageIds": [
+        "1571902943202-507ec2618e8f"
+      ],
+      "description": "7000 ㎡ 藝術美學空間,可同時容納 600 人,多功能湯泉、汗蒸、足道、SPA、自助餐、影院全配齊,24 小時營業。"
+    },
+    {
+      "id": "junlanmuzu",
+      "name": "君蘭沐足按摩",
+      "category": "wellness",
+      "subcategory": "沐足 · 平價",
+      "rating": 4.2,
+      "reviewCount": 180,
+      "pricePerPerson": 108,
+      "mustTry": [
+        "沐足",
+        "肩頸按摩",
+        "推拿"
+      ],
+      "hasAirCon": true,
+      "indoor": "indoor",
+      "distanceFromHotel": 2.2,
+      "address": "順德區容桂寶城路 24 號 78 號舖",
+      "openHours": "12:00–01:00",
+      "michelin": false,
+      "imageIds": [
+        "1604881988758-f76ad2f7aac1"
+      ],
+      "description": "容桂平價沐足,人均 ¥108,沐足 + 肩頸按摩 + 推拿,行到攰想快快鬆返嘅首選。"
+    }
+  ]
+}
+</script>
+
+<!-- ====== APP LOGIC ====== -->
+<script>
+(function() {
+  'use strict';
+
+  // ====== CONFIG ======
+  const STORAGE_KEY = 'foshanTrip2026';
+  const STORAGE_VERSION = 2;
+  const LOGIN_COOLDOWN_MS = 30000;
+  const LOGIN_MAX_ATTEMPTS = 3;
+  const TRIP_START_TS = 1782844800000; // 2026-06-30 00:00 +08:00
+  const TRIP_END_TS = 1783104000000;   // 2026-07-02 23:59 +08:00
+
+  // ====== LOAD DATA ======
+  const USERS_DATA = JSON.parse(document.getElementById('users-data').textContent);
+  const PLACES_DATA = JSON.parse(document.getElementById('places-data').textContent);
+  const USER_MAP = new Map(USERS_DATA.users.map(u => [u.name.toLowerCase(), u]));
+
+  // ====== STATE ======
+  let state = loadState();
+  let view = { tab: 'all', filters: { cold: false, indoor: false, michelin: false, minRating: false, nearOnly: false } };
+  let loginAttempts = 0;
+  let cooldownUntil = 0;
+
+  function defaultState() {
+    return { version: STORAGE_VERSION, currentUser: null, votes: {}, comments: {} };
+  }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return defaultState();
+      const parsed = JSON.parse(raw);
+      if (!parsed.version) return defaultState();
+      // Migrate: v1 (counts) -> v2 (arrays)
+      if (parsed.version === 1) {
+        const migrated = defaultState();
+        if (parsed.currentUser) migrated.currentUser = parsed.currentUser;
+        if (parsed.votes) {
+          for (const [pid, count] of Object.entries(parsed.votes)) {
+            if (count > 0) migrated.votes[pid] = [{ user: parsed.currentUser || '?', ts: Date.now() }];
+          }
+        }
+        if (parsed.comments) migrated.comments = parsed.comments;
+        return migrated;
+      }
+      return Object.assign(defaultState(), parsed);
+    } catch (e) {
+      return defaultState();
+    }
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      showToast('儲存失敗,睇睇個瀏覽器設定', 'error');
+    }
+  }
+
+  // ====== HELPERS ======
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $$(sel, root) { return Array.from((root || document).querySelectorAll(sel)); }
+  function el(tag, attrs, children) {
+    const node = document.createElement(tag);
+    if (attrs) {
+      for (const [k, v] of Object.entries(attrs)) {
+        if (k === 'class') node.className = v;
+        else if (k === 'html') node.innerHTML = v;
+        else if (k === 'text') node.textContent = v;
+        else if (k.startsWith('on') && typeof v === 'function') node.addEventListener(k.slice(2), v);
+        else if (v === true) node.setAttribute(k, '');
+        else if (v !== false && v != null) node.setAttribute(k, v);
+      }
+    }
+    if (children) {
+      for (const c of [].concat(children)) {
+        if (c == null) continue;
+        node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+      }
+    }
+    return node;
+  }
+  function timeAgo(ts) {
+    const s = Math.floor((Date.now() - ts) / 1000);
+    if (s < 60) return '啱啱';
+    if (s < 3600) return Math.floor(s/60) + ' 分鐘前';
+    if (s < 86400) return Math.floor(s/3600) + ' 個鐘前';
+    if (s < 604800) return Math.floor(s/86400) + ' 日前';
+    const d = new Date(ts);
+    return `${d.getMonth()+1}/${d.getDate()}`;
+  }
+  function getUser(name) { return USER_MAP.get(name.toLowerCase()); }
+  function getVotes(placeId) { return state.votes[placeId] || []; }
+  function getComments(placeId) { return state.comments[placeId] || []; }
+  function hasMyVote(placeId) {
+    if (!state.currentUser) return false;
+    return getVotes(placeId).some(v => v.user === state.currentUser);
+  }
+  function getMyVoteTs(placeId) {
+    if (!state.currentUser) return 0;
+    const v = getVotes(placeId).find(v => v.user === state.currentUser);
+    return v ? v.ts : 0;
+  }
+  function myVoteCount() {
+    if (!state.currentUser) return 0;
+    let c = 0;
+    for (const arr of Object.values(state.votes)) {
+      if (arr.some(v => v.user === state.currentUser)) c++;
+    }
+    return c;
+  }
+  function filterPlaces(places) {
+    return places.filter(p => {
+      if (view.filters.cold && !p.hasAirCon) return false;
+      if (view.filters.indoor && p.indoor === 'outdoor') return false;
+      if (view.filters.michelin && !p.michelin) return false;
+      if (view.filters.minRating && p.rating < 4.5) return false;
+      if (view.filters.nearOnly && p.distanceFromHotel > 2) return false;
+      return true;
+    });
+  }
+  function placeByCategory(cat) { return PLACES_DATA.places.filter(p => p.category === cat); }
+  function visiblePlaces() {
+    if (view.tab === 'overview') return [];
+    if (view.tab === 'all') return PLACES_DATA.places;
+    return placeByCategory(view.tab);
+  }
+  function isOrganizer() {
+    return state.currentUser && getUser(state.currentUser)?.role === 'organizer';
+  }
+  function countByCategory(cat) {
+    return cat === 'all' ? PLACES_DATA.places.length : placeByCategory(cat).length;
+  }
+
+  // ====== TOAST ======
+  function showToast(message, type) {
+    const root = $('#toast-root');
+    const t = el('div', { class: 'toast' + (type ? ' toast--' + type : ''), text: message });
+    root.appendChild(t);
+    requestAnimationFrame(() => t.classList.add('is-visible'));
+    setTimeout(() => {
+      t.classList.remove('is-visible');
+      setTimeout(() => t.remove(), 250);
+    }, 2800);
+  }
+
+  // ====== MODAL ======
+  function confirmModal({ title, body, okText = '確定', okClass = 'modal__ok', onOk }) {
+    const modal = $('#confirm-modal');
+    $('#confirm-title', modal).textContent = title;
+    $('#confirm-body', modal).textContent = body;
+    const okBtn = $('#confirm-ok', modal);
+    okBtn.textContent = okText;
+    okBtn.className = okClass;
+    const cancelBtn = $('#confirm-cancel', modal);
+    const cleanup = () => {
+      okBtn.removeEventListener('click', okHandler);
+      cancelBtn.removeEventListener('click', cancelHandler);
+    };
+    const okHandler = () => { cleanup(); modal.close(); onOk && onOk(); };
+    const cancelHandler = () => { cleanup(); modal.close(); };
+    okBtn.addEventListener('click', okHandler);
+    cancelBtn.addEventListener('click', cancelHandler);
+    modal.showModal();
+  }
+
+  // ====== LOGIN ======
+  const loginScreen = $('#login');
+  const appEl = $('#app');
+  const loginForm = $('#login-form');
+  const nameInput = $('#login-name');
+  const codeInput = $('#login-code');
+  const submitBtn = $('#login-submit');
+  const errorEl = $('#login-error');
+
+  function tryLogin() {
+    if (Date.now() < cooldownUntil) {
+      const remain = Math.ceil((cooldownUntil - Date.now()) / 1000);
+      showError(`撞錯太多次,等多 ${remain} 秒再試`);
+      return;
+    }
+    const name = nameInput.value.trim();
+    if (!name) { showError('請打你個英文名'); return; }
+    const user = getUser(name);
+    if (!user) {
+      loginAttempts++;
+      if (loginAttempts >= LOGIN_MAX_ATTEMPTS) {
+        cooldownUntil = Date.now() + LOGIN_COOLDOWN_MS;
+        loginAttempts = 0;
+        submitBtn.disabled = true;
+        showError(`撞錯太多次,掣鎖咗 30 秒,問吓主揪 ${USERS_DATA.organizer}`);
+        setTimeout(() => { submitBtn.disabled = false; clearError(); }, LOGIN_COOLDOWN_MS);
+      } else {
+        showError(`搵唔到「${name}」呢個名,問吓主揪 ${USERS_DATA.organizer} 確認 (剩 ${LOGIN_MAX_ATTEMPTS - loginAttempts} 次)`);
+      }
+      return;
+    }
+    state.currentUser = user.name;
+    saveState();
+    enterApp();
+  }
+  function showError(msg) { errorEl.textContent = msg; errorEl.classList.add('is-visible'); }
+  function clearError() { errorEl.textContent = ''; errorEl.classList.remove('is-visible'); }
+
+  loginForm.addEventListener('submit', e => { e.preventDefault(); tryLogin(); });
+  // codeInput removed; name is the access code
+
+  // ====== ENTER APP ======
+  function enterApp() {
+    loginScreen.hidden = true;
+    appEl.hidden = false;
+    render();
+    // Auto-show organizer tip on first login
+    if (isOrganizer() && !localStorage.getItem('foshan_tip_shown')) {
+      localStorage.setItem('foshan_tip_shown', '1');
+      setTimeout(() => showToast('你係主揪,記得去「總覽」tab 睇晒所有人投票 ☺', 'success'), 800);
+    }
+  }
+
+  function logout() {
+    state.currentUser = null;
+    saveState();
+    appEl.hidden = true;
+    loginScreen.hidden = false;
+    nameInput.value = '';
+    clearError();
+  }
+
+  // ====== RENDER ======
+  function render() {
+    renderAppbar();
+    renderWelcome();
+    renderTabs();
+    renderFilters();
+    renderGrid();
+  }
+
+  function renderAppbar() {
+    const u = getUser(state.currentUser);
+    if (!u) return;
+    $('#appbar-avatar').textContent = u.avatar || '🙂';
+    $('#appbar-name').textContent = u.name;
+    const roleEl = $('#appbar-role');
+    roleEl.innerHTML = '';
+    if (u.role === 'organizer') {
+      roleEl.appendChild(el('span', { class: 'role-chip', text: '主揪' }));
+      roleEl.appendChild(el('span', { text: '睇總覽' }));
+    } else {
+      roleEl.appendChild(el('span', { text: '投票嘅人' }));
+    }
+    const peers = $('#appbar-peers');
+    peers.innerHTML = '';
+    for (const other of USERS_DATA.users) {
+      if (other.name === state.currentUser) continue;
+      const dot = el('div', { class: 'appbar__peer', text: other.avatar, title: other.name });
+      peers.appendChild(dot);
+    }
+  }
+
+  function renderWelcome() {
+    const u = getUser(state.currentUser);
+    if (!u) return;
+    const voted = myVoteCount();
+    const total = PLACES_DATA.places.length;
+    const remain = total - voted;
+    $('#welcome-greeting').textContent = `歡迎 ${u.name} ${u.avatar} · ${voted}/${total}`;
+    $('#welcome-sub').textContent = remain > 0 ? `仲有 ${remain} 個未揀好,去投啦 →` : '全部都投完啦 🎉';
+    const pct = total === 0 ? 0 : (voted / total) * 100;
+    $('#welcome-fill').style.width = pct + '%';
+    $('#welcome-count').textContent = `${voted} / ${total}`;
+    // Countdown
+    const now = Date.now();
+    const cd = $('#welcome-countdown');
+    cd.innerHTML = '';
+    if (now < TRIP_START_TS) {
+      const days = Math.ceil((TRIP_START_TS - now) / 86400000);
+      cd.appendChild(el('span', { text: '仲有幾日出發' }));
+      cd.appendChild(el('span', { class: 'welcome__countdown-num', text: `${days} 日` }));
+    } else if (now <= TRIP_END_TS) {
+      const dayIdx = Math.floor((now - TRIP_START_TS) / 86400000) + 1;
+      cd.appendChild(el('span', { text: '🔴 緊嘅' }));
+      cd.appendChild(el('span', { class: 'welcome__countdown-num', text: `第 ${dayIdx} 日` }));
+    } else {
+      const days = Math.floor((now - TRIP_END_TS) / 86400000);
+      cd.appendChild(el('span', { text: '返咟嚟' }));
+      cd.appendChild(el('span', { class: 'welcome__countdown-num', text: `${days} 日` }));
+    }
+  }
+
+  function renderTabs() {
+    const tabsEl = $('#tabs');
+    tabsEl.innerHTML = '';
+    const tabs = [
+      { id: 'all', label: '全部' },
+      { id: 'restaurant', label: '餐廳' },
+      { id: 'attraction', label: '景點' },
+      { id: 'nightlife', label: '夜店' },
+      { id: 'wellness', label: '養生' }
+    ];
+    if (isOrganizer()) tabs.push({ id: 'overview', label: '主揪總覽' });
+    for (const t of tabs) {
+      const btn = el('button', {
+        class: 'tab' + (view.tab === t.id ? ' is-active' : ''),
+        role: 'tab',
+        'aria-selected': view.tab === t.id ? 'true' : 'false',
+        onclick: () => { view.tab = t.id; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+      });
+      btn.appendChild(el('span', { text: t.label }));
+      btn.appendChild(el('span', { class: 'tab__count', text: String(t.id === 'overview' ? USERS_DATA.users.length : countByCategory(t.id)) }));
+      tabsEl.appendChild(btn);
+    }
+  }
+
+  function renderFilters() {
+    const f = $('#filters');
+    f.innerHTML = '';
+    if (view.tab === 'overview') return;
+    const chips = [
+      { id: 'cold', label: '冷氣', icon: '❄' },
+      { id: 'indoor', label: '室內', icon: '🏠' },
+      { id: 'michelin', label: '必食榜', icon: '🔥' },
+      { id: 'minRating', label: '4.5分以上', icon: '★' },
+      { id: 'nearOnly', label: '2km 內', icon: '📍' }
+    ];
+    for (const c of chips) {
+      const active = view.filters[c.id];
+      const btn = el('button', {
+        class: 'chip' + (active ? ' is-active' : ''),
+        'aria-pressed': active ? 'true' : 'false',
+        onclick: () => { view.filters[c.id] = !view.filters[c.id]; render(); }
+      });
+      btn.appendChild(el('span', { class: 'chip__icon', text: c.icon }));
+      btn.appendChild(el('span', { text: c.label }));
+      f.appendChild(btn);
+    }
+  }
+
+  function renderGrid() {
+    const grid = $('#grid');
+    grid.innerHTML = '';
+    grid.className = view.tab === 'overview' ? 'grid grid--overview' : 'grid';
+
+    if (view.tab === 'overview') {
+      renderOverview(grid);
+      return;
+    }
+    const places = filterPlaces(visiblePlaces());
+    if (places.length === 0) {
+      const empty = el('div', { class: 'empty' }, [
+        el('div', { class: 'empty__title', text: '條件太緊' }),
+        el('div', { text: '放鬆少少再試吓 ☺' }),
+        el('button', {
+          class: 'empty__action',
+          text: '清除條件',
+          onclick: () => { view.filters = { cold: false, indoor: false, michelin: false, minRating: false, nearOnly: false }; render(); }
+        })
+      ]);
+      grid.appendChild(empty);
+      return;
+    }
+    // Sort: featured first, then by rating desc
+    const sorted = places.slice().sort((a, b) => {
+      const af = PLACES_DATA.featured.includes(a.id) ? 1 : 0;
+      const bf = PLACES_DATA.featured.includes(b.id) ? 1 : 0;
+      if (af !== bf) return bf - af;
+      return b.rating - a.rating;
+    });
+    for (const p of sorted) {
+      grid.appendChild(renderCard(p));
+    }
+  }
+
+  function renderCard(p) {
+    const card = el('article', { class: 'card' + (PLACES_DATA.featured.includes(p.id) ? ' card--featured' : ''), id: 'place-' + p.id });
+    const media = el('div', { class: 'card__media' });
+    const imgId = p.imageIds && p.imageIds[0];
+    if (imgId) {
+      const img = el('img', {
+        class: 'card__img',
+        src: `https://images.unsplash.com/photo-${imgId}?w=800&q=80&auto=format&fit=crop`,
+        alt: p.name,
+        loading: 'lazy',
+        onerror: function() { this.style.display = 'none'; this.nextElementSibling.style.display = 'grid'; }
+      });
+      media.appendChild(img);
+    }
+    const fallback = el('div', { class: 'card__img-fallback', style: 'display:none', text: p.name });
+    media.appendChild(fallback);
+    // Category
+    const catMap = { restaurant: '餐廳', attraction: '景點', nightlife: '夜店', wellness: '養生' };
+    media.appendChild(el('span', { class: 'card__category', text: catMap[p.category] || p.category }));
+    // Badges
+    const badges = el('div', { class: 'card__badges' });
+    if (p.hasAirCon) badges.appendChild(el('span', { class: 'badge badge--cold', text: '❄ 冷氣' }));
+    if (p.indoor === 'indoor') badges.appendChild(el('span', { class: 'badge badge--indoor', text: '🏠 室內' }));
+    if (p.michelin) badges.appendChild(el('span', { class: 'badge badge--michelin', text: '🔥 必食' }));
+    media.appendChild(badges);
+    card.appendChild(media);
+
+    const body = el('div', { class: 'card__body' });
+    body.appendChild(el('h3', { class: 'card__name', text: p.name }));
+    // Meta
+    const meta = el('div', { class: 'card__meta' });
+    meta.appendChild(el('span', { class: 'card__rating', html: `<span class="card__rating-star">★</span> ${p.rating} <span style="color:var(--ink-faint)">(${p.reviewCount.toLocaleString()})</span>` }));
+    if (p.pricePerPerson > 0) {
+      meta.appendChild(el('span', { class: 'card__price', text: `¥${p.pricePerPerson}/人` }));
+    } else {
+      meta.appendChild(el('span', { class: 'card__price', text: '免費' }));
+    }
+    meta.appendChild(el('span', { class: 'card__distance', html: `📍 ${p.distanceFromHotel.toFixed(1)} km` }));
+    body.appendChild(meta);
+    // Must try
+    if (p.mustTry && p.mustTry.length) {
+      const mt = el('div', { class: 'card__musttry' });
+      for (const m of p.mustTry.slice(0, 4)) {
+        mt.appendChild(el('span', { class: 'musttry-chip', text: m }));
+      }
+      body.appendChild(mt);
+    }
+    body.appendChild(el('p', { class: 'card__desc', text: p.description }));
+    // Footer
+    const footer = el('div', { class: 'card__footer' });
+    const voters = el('div', { class: 'voters' });
+    const voteList = getVotes(p.id);
+    if (voteList.length > 0) {
+      const votersList = el('div', { class: 'voters__list' });
+      for (const v of voteList.slice(0, 3)) {
+        const u = getUser(v.user);
+        votersList.appendChild(el('div', { class: 'voter-dot', text: u ? u.avatar : '?', title: v.user }));
+      }
+      voters.appendChild(votersList);
+      voters.appendChild(el('span', { class: 'voters__count', text: `${voteList.length} 票` }));
+    } else {
+      voters.appendChild(el('span', { class: 'voters__count', style: 'color:var(--ink-faint)', text: '仲未有人投' }));
+    }
+    footer.appendChild(voters);
+    // Vote button
+    const myVoted = hasMyVote(p.id);
+    const voteBtn = el('button', {
+      class: 'btn-vote' + (myVoted ? ' is-voted' : ''),
+      'aria-pressed': myVoted ? 'true' : 'false',
+      onclick: e => { e.stopPropagation(); handleVoteClick(p.id, voteBtn); }
+    });
+    voteBtn.appendChild(el('span', { class: 'btn-vote__icon', text: myVoted ? '♥' : '♡' }));
+    voteBtn.appendChild(el('span', { text: myVoted ? '已投' : '投' }));
+    footer.appendChild(voteBtn);
+    body.appendChild(footer);
+    card.appendChild(body);
+
+    // Expand section
+    const expand = el('div', { class: 'card__expand' });
+    expand.appendChild(el('div', { class: 'card__hours', html: `🕒 <span>${p.openHours}</span>` }));
+    expand.appendChild(el('div', { class: 'card__address', html: `📍 <span>${p.address}</span>` }));
+    // Comments
+    const commentList = el('div', { class: 'card__comments' });
+    const comments = getComments(p.id);
+    for (const c of comments) {
+      const cu = getUser(c.user);
+      const cmt = el('div', { class: 'comment' });
+      cmt.appendChild(el('div', { class: 'comment__avatar', text: cu ? cu.avatar : '?' }));
+      const cb = el('div', { class: 'comment__body' });
+      const ch = el('div', { class: 'comment__head' });
+      ch.appendChild(el('span', { class: 'comment__user', text: c.user }));
+      ch.appendChild(el('span', { class: 'comment__time', text: timeAgo(c.ts) }));
+      cb.appendChild(ch);
+      cb.appendChild(el('div', { class: 'comment__text', text: c.text }));
+      cmt.appendChild(cb);
+      if (c.user === state.currentUser) {
+        const del = el('button', { class: 'comment__del', text: '✕', 'aria-label': '刪除留言', onclick: () => {
+          state.comments[p.id] = getComments(p.id).filter(x => !(x.user === c.user && x.ts === c.ts));
+          saveState();
+          render();
+        }});
+        cmt.appendChild(del);
+      }
+      commentList.appendChild(cmt);
+    }
+    expand.appendChild(commentList);
+    // Comment form
+    const form = el('form', { class: 'comment-form', onsubmit: e => { e.preventDefault(); submitComment(p.id, input); }});
+    const input = el('input', { type: 'text', placeholder: `用 ${state.currentUser} 個名留言...`, maxlength: 200 });
+    const submit = el('button', { type: 'submit', text: '送出' });
+    form.appendChild(input);
+    form.appendChild(submit);
+    expand.appendChild(form);
+    card.appendChild(expand);
+
+    // Expand toggle
+    card.addEventListener('click', e => {
+      if (e.target.closest('.btn-vote, .comment-form, button, input, .comment__del')) return;
+      card.classList.toggle('is-expanded');
+    });
+    return card;
+  }
+
+  function handleVoteClick(placeId, btn) {
+    if (!state.currentUser) return;
+    const myVoted = hasMyVote(placeId);
+    if (myVoted) {
+      confirmModal({
+        title: '收回投票?',
+        body: '真係唔投?',
+        okText: '收回',
+        okClass: 'modal__ok modal__ok--danger',
+        onOk: () => {
+          const arr = getVotes(placeId);
+          const idx = arr.findIndex(v => v.user === state.currentUser);
+          if (idx >= 0) arr.splice(idx, 1);
+          if (arr.length === 0) delete state.votes[placeId];
+          saveState();
+          render();
+          showToast('已收回');
+        }
+      });
+    } else {
+      if (!state.votes[placeId]) state.votes[placeId] = [];
+      state.votes[placeId].push({ user: state.currentUser, ts: Date.now() });
+      saveState();
+      btn.classList.add('is-popping');
+      setTimeout(() => btn.classList.remove('is-popping'), 600);
+      render();
+      showToast(`已投咗畀 ${getUser(state.currentUser).name} ✓`, 'success');
+    }
+  }
+
+  function submitComment(placeId, input) {
+    const text = input.value.trim();
+    if (!text) return;
+    if (!state.comments[placeId]) state.comments[placeId] = [];
+    state.comments[placeId].push({ user: state.currentUser, text, ts: Date.now() });
+    saveState();
+    render();
+    showToast('留言 send 出咗');
+  }
+
+  function renderOverview(container) {
+    // User stats
+    const userGrid = el('div', { class: 'ov-user-grid', style: 'grid-column: 1 / -1' });
+    for (const u of USERS_DATA.users) {
+      let vCount = 0, cCount = 0;
+      for (const arr of Object.values(state.votes)) if (arr.some(v => v.user === u.name)) vCount++;
+      for (const arr of Object.values(state.comments)) cCount += arr.filter(c => c.user === u.name).length;
+      const card = el('div', { class: 'ov-user' });
+      card.appendChild(el('div', { class: 'ov-user__avatar', text: u.avatar }));
+      card.appendChild(el('div', { class: 'ov-user__name', text: u.name + (u.role === 'organizer' ? ' (主揪)' : '') }));
+      card.appendChild(el('div', { class: 'ov-user__stat', text: `${vCount} 票 · ${cCount} 條留言` }));
+      userGrid.appendChild(card);
+    }
+    container.appendChild(userGrid);
+    // Per-place voter lists (sorted by votes desc)
+    const sorted = PLACES_DATA.places.slice().sort((a, b) => getVotes(b.id).length - getVotes(a.id).length);
+    for (const p of sorted) {
+      const voters = getVotes(p.id);
+      const card = el('div', { class: 'ov-card' });
+      const head = el('div', { class: 'ov-card__title' });
+      head.appendChild(el('span', { text: p.name }));
+      head.appendChild(el('small', { text: `${voters.length} 票` }));
+      card.appendChild(head);
+      const votersEl = el('div', { class: 'ov-card__voters' });
+      if (voters.length === 0) {
+        votersEl.appendChild(el('span', { class: 'ov-user__stat', text: '仲未有人投' }));
+      } else {
+        for (const v of voters) {
+          const u = getUser(v.user);
+          const chip = el('span', { class: 'ov-voter', text: `${u ? u.avatar : '?'} ${v.user}` });
+          votersEl.appendChild(chip);
+        }
+      }
+      card.appendChild(votersEl);
+      // Comments count
+      const cmt = getComments(p.id);
+      if (cmt.length) {
+        const lastCmt = cmt[cmt.length - 1];
+        const cu = getUser(lastCmt.user);
+        card.appendChild(el('div', { class: 'ov-user__stat', text: `${cmt.length} 條留言 · 最新: ${cu ? cu.avatar : '?'}${lastCmt.user}: ${lastCmt.text.slice(0, 30)}${lastCmt.text.length > 30 ? '…' : ''}` }));
+      }
+      container.appendChild(card);
+    }
+  }
+
+  // ====== EXPORT / IMPORT ======
+  function exportData() {
+    const payload = {
+      schemaVersion: 2,
+      exportedBy: state.currentUser,
+      exportedAt: Date.now(),
+      votes: state.votes,
+      comments: state.comments
+    };
+    const json = JSON.stringify(payload, null, 2);
+    // Try clipboard first
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(json).then(
+        () => showToast('已複製,傳畀主揪啦 ✓', 'success'),
+        () => fallbackDownload(json)
+      );
+    } else {
+      fallbackDownload(json);
+    }
+  }
+  function fallbackDownload(json) {
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `foshan-trip-2026-${state.currentUser}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('已 download JSON 檔', 'success');
+  }
+
+  function openImport() {
+    $('#import-text').value = '';
+    $('#import-file').value = '';
+    $('#import-modal').showModal();
+  }
+  function doImport() {
+    const text = $('#import-text').value.trim();
+    if (!text) { showToast('貼返 JSON 內容先', 'error'); return; }
+    try {
+      const data = JSON.parse(text);
+      if (data.schemaVersion !== 2) throw new Error('schemaVersion 不對');
+      if (!data.votes || !data.comments) throw new Error('缺少 votes/comments');
+      let vAdded = 0, cAdded = 0, vSkipped = 0, cSkipped = 0;
+      // Merge votes
+      for (const [pid, list] of Object.entries(data.votes)) {
+        if (!PLACES_DATA.places.some(p => p.id === pid)) { vSkipped++; continue; }
+        if (!Array.isArray(list)) continue;
+        const existing = state.votes[pid] || [];
+        for (const incoming of list) {
+          if (!incoming.user || !incoming.ts) continue;
+          const idx = existing.findIndex(v => v.user === incoming.user);
+          if (idx >= 0) {
+            if (incoming.ts > existing[idx].ts) existing[idx] = incoming;
+          } else {
+            existing.push(incoming);
+            vAdded++;
+          }
+        }
+        if (existing.length > 0) state.votes[pid] = existing;
+      }
+      // Merge comments
+      for (const [pid, list] of Object.entries(data.comments)) {
+        if (!PLACES_DATA.places.some(p => p.id === pid)) { cSkipped++; continue; }
+        if (!Array.isArray(list)) continue;
+        const existing = state.comments[pid] || [];
+        for (const incoming of list) {
+          if (!incoming.user || !incoming.text || !incoming.ts) continue;
+          const idx = existing.findIndex(c => c.user === incoming.user && c.ts === incoming.ts);
+          if (idx < 0) {
+            existing.push(incoming);
+            cAdded++;
+          }
+        }
+        if (existing.length > 0) state.comments[pid] = existing;
+      }
+      saveState();
+      render();
+      $('#import-modal').close();
+      showToast(`已合併 ${vAdded} 票、${cAdded} 條留言`, 'success');
+    } catch (e) {
+      showToast('JSON 格式唔啱,睇下: ' + e.message, 'error');
+    }
+  }
+
+  // ====== DRAWER ======
+  const drawer = $('#drawer');
+  const drawerBackdrop = $('#drawer-backdrop');
+  function openDrawer() {
+    drawer.classList.add('is-open');
+    drawerBackdrop.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+  }
+  function closeDrawer() {
+    drawer.classList.remove('is-open');
+    drawerBackdrop.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+  }
+  $('#appbar-menu').addEventListener('click', openDrawer);
+  drawerBackdrop.addEventListener('click', closeDrawer);
+  drawer.addEventListener('click', e => {
+    const action = e.target.closest('[data-action]')?.dataset.action;
+    if (!action) return;
+    closeDrawer();
+    if (action === 'export') exportData();
+    else if (action === 'import') openImport();
+    else if (action === 'switch') {
+      confirmModal({
+        title: '轉用戶?',
+        body: `確定登出 ${state.currentUser}?你嘅投票會留住,下次再登入仲喺度。`,
+        okText: '切換',
+        okClass: 'modal__ok modal__ok--danger',
+        onOk: logout
+      });
+    } else if (action === 'about') $('#about-modal').showModal();
+  });
+
+  $('#import-ok').addEventListener('click', doImport);
+  $('#import-cancel').addEventListener('click', () => $('#import-modal').close());
+  $('#about-close').addEventListener('click', () => $('#about-modal').close());
+  $('#import-file').addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => { $('#import-text').value = ev.target.result; };
+    reader.readAsText(file);
+  });
+
+  // Close dialogs on backdrop click
+  $$('dialog').forEach(d => {
+    d.addEventListener('click', e => {
+      if (e.target === d) d.close();
+    });
+  });
+
+  // ====== FAB (alternative menu trigger) ======
+  // Not needed; appbar menu handles it. Keep FAB for sticky mobile.
+  // Actually, the design didn't include a separate FAB. Skip.
+
+  // ====== INIT ======
+  function init() {
+    if (state.currentUser && getUser(state.currentUser)) {
+      enterApp();
+    } else {
+      state.currentUser = null;
+      saveState();
+      nameInput.focus();
+    }
+  }
+  init();
+})();
+</script>
+</body>
+</html>
